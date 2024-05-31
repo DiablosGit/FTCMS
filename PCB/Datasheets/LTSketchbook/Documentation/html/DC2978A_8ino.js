@@ -1,0 +1,25 @@
+var DC2978A_8ino =
+[
+    [ "clear_faults", "DC2978A_8ino.html#a6acb28e788e89043e09ec3e97b68021a", null ],
+    [ "loop", "DC2978A_8ino.html#a39a24a80bc3128a314bb15c85fc22cef", null ],
+    [ "margin_high", "DC2978A_8ino.html#ad24eba757f22b0cb3c5eb940c36179b9", null ],
+    [ "margin_low", "DC2978A_8ino.html#af827606f3b264da3c2ccd6a2c998c5f5", null ],
+    [ "print_prompt", "DC2978A_8ino.html#a2ea477f9f0e79d6865887e79570ac386", null ],
+    [ "print_title", "DC2978A_8ino.html#a0b879bb0b1ef45ad46fc8331c59225f9", null ],
+    [ "read_input_current", "DC2978A_8ino.html#ae6d48356bde048a1388adea2358c5910", null ],
+    [ "read_input_voltage", "DC2978A_8ino.html#a4f0567419043f1a29804aafc6e4f7713", null ],
+    [ "read_output_current", "DC2978A_8ino.html#aa8ae2d961de6de75bb2b17fdb0ff565f", null ],
+    [ "read_output_voltage", "DC2978A_8ino.html#ad50babaab14bc8184d0a396c2dd5bd5b", null ],
+    [ "read_status", "DC2978A_8ino.html#a2654e0b57dd925aeda40d3e7d0f1f9f1", null ],
+    [ "reset", "DC2978A_8ino.html#ab9d3f06dc4ef871fad50465095b5ea32", null ],
+    [ "set_output_high_voltage", "DC2978A_8ino.html#a320aa1ff461120b668c393f7e23c5809", null ],
+    [ "set_output_low_voltage", "DC2978A_8ino.html#aba0891af30911791dc16f09bf728e912", null ],
+    [ "set_output_voltage", "DC2978A_8ino.html#ad02ea2226f8b0238f51e2b09a50e3442", null ],
+    [ "set_slew", "DC2978A_8ino.html#af4f373d8eec4b44ca57c610be8f1ecb4", null ],
+    [ "setup", "DC2978A_8ino.html#a90de5b68ab8defa635679fc0620fb698", null ],
+    [ "turn_off", "DC2978A_8ino.html#ae03a00ae63d16bfe97fef73477940aae", null ],
+    [ "turn_on", "DC2978A_8ino.html#ad21dfa46d53e02d62327a35689a17ce2", null ],
+    [ "LTC7841_I2C_ADDRESS", "DC2978A_8ino.html#a9fbb49c36f047b4d497397b10929dc98", null ],
+    [ "ltc7841_i2c_address", "DC2978A_8ino.html#a58a3d5aa86dce7445382f4ad3e96e79c", null ],
+    [ "smbus", "DC2978A_8ino.html#a2e05c58fe40b5b55b1ee32676ddad6e8", null ]
+];

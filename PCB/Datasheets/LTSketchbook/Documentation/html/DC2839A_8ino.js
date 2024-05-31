@@ -1,0 +1,28 @@
+var DC2839A_8ino =
+[
+    [ "ISR", "DC2839A_8ino.html#ad39420cdd896dd12c68e36313139d0a5", null ],
+    [ "loop", "DC2839A_8ino.html#a39a24a80bc3128a314bb15c85fc22cef", null ],
+    [ "menu_1_convert_read", "DC2839A_8ino.html#aef122cb0da043d43546d224b038a1f17", null ],
+    [ "menu_2_changeVGain", "DC2839A_8ino.html#aa023c32c3074df310ad11651216c97a0", null ],
+    [ "menu_3_changeIGain", "DC2839A_8ino.html#a018399ea59ed4922b34baf29c7a450f0", null ],
+    [ "menu_4_changeSampleFreq", "DC2839A_8ino.html#a79b48ad471363ac77ee73af05a9949d0", null ],
+    [ "menu_5_pipeToFile", "DC2839A_8ino.html#a9ca958af8bfe4aa75244ec0bcea9df53", null ],
+    [ "menu_6_stopSampling", "DC2839A_8ino.html#a35d6fd45bd829702b4095731e6cad374", null ],
+    [ "print_prompt", "DC2839A_8ino.html#a2ea477f9f0e79d6865887e79570ac386", null ],
+    [ "print_title", "DC2839A_8ino.html#a0b879bb0b1ef45ad46fc8331c59225f9", null ],
+    [ "setup", "DC2839A_8ino.html#a90de5b68ab8defa635679fc0620fb698", null ],
+    [ "update_compare_reg", "DC2839A_8ino.html#add6eb45fc3068379b1e807f06f6511d6", null ],
+    [ "LTC6115_GPIO", "DC2839A_8ino.html#afba6cd1efba0b22360c2c346d0c0f6cb", null ],
+    [ "compare_reg", "DC2839A_8ino.html#a227187f78fa91397727f076798e13d1e", null ],
+    [ "current_millis", "DC2839A_8ino.html#ae8f25a581b7d541dc29eb61e42c74bf7", null ],
+    [ "globaltime_ms", "DC2839A_8ino.html#a534e0ff712535eea8e171ab83f757cee", null ],
+    [ "ISR_flag", "DC2839A_8ino.html#afa8e0645b536a8331126d297190db431", null ],
+    [ "ISR_prompt_flag", "DC2839A_8ino.html#a5d14431ab1c8ec7bc94de266d4861f1f", null ],
+    [ "num_samples", "DC2839A_8ino.html#a3d9e36cd08b093b00ce26743e5f33da7", null ],
+    [ "print_flag", "DC2839A_8ino.html#a74bf27d7aadbe65862806853259523df", null ],
+    [ "readI", "DC2839A_8ino.html#aefc09c025706297bb3ed6388e802faa8", null ],
+    [ "readV", "DC2839A_8ino.html#ab9b517b8a53ce5d3277729b2e3297ecb", null ],
+    [ "samples_counter", "DC2839A_8ino.html#ae858a153ed8349afde23332fed655dfd", null ],
+    [ "start_millis", "DC2839A_8ino.html#afa8a07ee6236b14ab598158861fb5277", null ],
+    [ "update_interval", "DC2839A_8ino.html#a1d452c69bc6f97259f256de62ea99da3", null ]
+];
