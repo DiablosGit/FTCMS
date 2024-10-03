@@ -119,68 +119,33 @@ void cmd_68(uint8_t tx_cmd[2]) //The command to be transmitted
 
 
 
-// float readCellVoltage(int cellNumber) {
-
-//   byte cmd0 = SPI.transfer(0b00000000);
-//   byte cmd1 = SPI.transfer(0x00);
-//   uint8_t msg_tx[2] = [cmd0, cmd1];
-//   cmd_68(msg_tx);  
-
-// 	cmd[0] = tx_cmd[0];
-// 	cmd[1] =  tx_cmd[1];
-// 	cmd_pec = pec15_calc(2, cmd);
-// 	cmd[2] = (uint8_t)(cmd_pec >> 8);
-// 	cmd[3] = (uint8_t)(cmd_pec);
-
-  
-//   digitalWrite(CS_PIN, HIGH);
-
-//   // Combine high and low bytes
-//   int voltageRaw = (highByte << 8) | lowByte;
-//   Serial.print("Recieve: ");Serial.println(voltageRaw);
-//   // Convert raw value to voltage
-//   float voltage = voltageRaw * 0.0001; // Example conversion factor
-  
-//   return voltage;
-// }
-
-
-// void readCellVoltages(float *voltages, int numberOfCells) {
-//   // Wake up the ADBMS1818
-//   wakeUpADBMS1818();
-//   delay(2);
-  
-//   // Send command to read cell voltages
-//   for (int i = 0; i < numberOfCells; i++) {
-//     voltages[i] = readCellVoltage(i + 1); // Cell numbers start from 1
-
-//   }
-// }
-
-
 void setup() {
   // Initialize the serial communication:
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   // Configure the SPI
   SPI.begin();
+  SPI.setClockDivider(SPI_CLOCK_DIV8);
   SPI.setDataMode(SPI_MODE3); // CPHA = 1, CPOL = 1
   SPI.setBitOrder(MSBFIRST); // Most significant bit first
   pinMode(CS_PIN, OUTPUT);
   digitalWrite(CS_PIN, HIGH); // Deselect ADBMS1818
+  delay(1000);
+  digitalWrite(6,LOW);
   
   // Initialize ADBMS1818
   initializeADBMS1818();
 }
 
-void loop() {
-  // Read cell voltages
-  // if (Serial.available() > 0) {
-  //   byte data = Serial.read();
-    
-  //   cmd_68(&data);
 
-  // }
+// Read Cell voltages
+// CC Bits
+// 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0  
+// ------------------------------------------
+// 0 | 1 | 1 | 0 | 1 | 1 | 0 | 0 | 0 | 0 | 0  -> Start Cell Voltage ADC Voncersion and Poll Status, Discharge not perimitted, all cells 0000
+// 0 | 0 | 0 | 0 | 0 | 0 | 0  | 0 | 1 | 0 | 0  -> Read Cell Voltage Register Group A
+
+void loop() {
 
   // Prüfen, ob Daten über die serielle Schnittstelle empfangen wurden
   if (Serial.available() > 0) {
@@ -223,6 +188,9 @@ void loop() {
 
   }
 }
+
+
+
 // #include "ADBMS1818.h"
 // #include "bms_hardware.h"
 
