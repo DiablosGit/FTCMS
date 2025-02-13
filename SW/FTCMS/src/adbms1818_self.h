@@ -17,12 +17,21 @@
 #define CELL_CH_5and11 5
 #define CELL_CH_6and12 6
 
+#define REG_ALL 0
+#define REG_1 1
+#define REG_2 2
+#define REG_3 3
+#define REG_4 4
+#define REG_5 5
+#define REG_6 6
+
 #define DCP_DISABLED 0
 #define DCP_ENABLED 1
 
 #define CFGR 0
 #define CFGRB 4
 
+#define NUM_RX_BYT 8
 #define CELL 1
 #define AUX 2
 #define STAT 3
@@ -274,5 +283,64 @@ void ADBMS1818_init_reg_limits(uint8_t total_ic, //!< Number of ICs in the syste
 							cell_asic *ic //!< A two dimensional array that will store the data
 							);
 				
+/*!
+ Reads and parses the ADBMS1818 cell voltage registers.
+ @return uint8_t, pec_error PEC Status.
+ 0: No PEC error detected
+ -1: PEC error detected, retry read  
+ */
+uint8_t ADBMS1818_rdcv(uint8_t reg, //!< Controls which cell voltage register is read back.
+                     uint8_t total_ic, //!< The number of ICs in the daisy chain
+                     cell_asic *ic //!< Array of the parsed cell codes from lowest to highest.
+                    );
 
-			
+/*! 
+ Reads the raw cell voltage register data
+ @return void 
+ */				   
+void ADBMS1818_rdcv_reg(uint8_t reg, //!< Determines which cell voltage register is read back
+                      uint8_t total_ic, //!< The number of ICs in the
+                      uint8_t *data //!< An array of the unparsed cell codes
+                     );			
+
+/*! 
+ Helper function that parses voltage measurement registers
+ @return int8_t, pec_error PEC Status.
+  0: Data read back has matching PEC
+ -1: Data read back has incorrect PEC 
+ */
+int8_t parse_cells(uint8_t current_ic, //!< Current IC
+                   uint8_t cell_reg, //!< Type of register
+                   uint8_t cell_data[], //!< Unparsed data
+                   uint16_t *cell_codes, //!< Parsed data
+                   uint8_t *ic_pec //!< PEC error
+				   );
+
+/*! Starts cell voltage and Sum of cells conversion  
+ @return void 
+ */
+void ADBMS1818_adcvsc(uint8_t MD, //!< ADC Conversion Mode
+					uint8_t DCP //!< Controls if Discharge is permitted during conversion
+					);
+
+/*!
+ Reads and parses the ADBMS1818 stat registers.
+ @return  int8_t, pec_error PEC Status
+  0: No PEC error detected
+  -1: PEC error detected, retry read 
+  */
+int8_t ADBMS1818_rdstat(uint8_t reg, //!< Determines which Stat  register is read back.
+                      uint8_t total_ic,//!< Number of ICs in the system
+                      cell_asic *ic //!< A two dimensional array that will store the data
+                     );	
+
+/*! 
+ Read the raw data from the ADBMS181x stat register
+ The function reads a single Status register and stores the read data in the *data point as a byte array. 
+ This function is rarely used outside of the ADBMS181x_rdstat() command.
+ @return void 
+ */	
+void ADBMS1818_rdstat_reg(uint8_t reg, //!< Determines which stat register is read back
+                        uint8_t total_ic, //!< The number of ICs in the system
+                        uint8_t *data //!< Array of the unparsed stat codes
+                       );

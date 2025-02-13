@@ -54,6 +54,7 @@ uint16_t pec15_calc(uint8_t len, //Number of bytes that will be used to calculat
 
 
 
+
 /* Wake isoSPI up from IDlE state and enters the READY state */
 void wakeup_idle(uint8_t total_ic) //Number of ICs in the system
 {
@@ -252,7 +253,7 @@ void ADBMS1818_wrcfg(uint8_t total_ic, //The number of ICs being written to
 			c_ic = total_ic - current_ic - 1;
 		}
 		Serial.println(c_ic);
-		
+
 		for (uint8_t data = 0; data<6; data++)
 		{
 			write_buffer[write_count] = ic[c_ic].config.tx_data[data];
@@ -674,3 +675,358 @@ void ADBMS1818_init_reg_limits(uint8_t total_ic, //Number of ICs in the system
         ic[cic].ic_reg.num_stat_reg=2;     
     } 
 }
+
+/* Writes the command and reads the raw cell voltage register data */
+void ADBMS1818_rdcv_reg(uint8_t reg, //Determines which cell voltage register is read back
+                      uint8_t total_ic, //the number of ICs in the
+                      uint8_t *data //An array of the unparsed cell codes
+                     )
+{
+	const uint8_t REG_LEN = 8; //Number of bytes in each ICs register + 2 bytes for the PEC
+	uint8_t cmd[4];
+	uint16_t cmd_pec;
+
+	if (reg == 1)     //1: RDCVA
+	{
+		cmd[1] = 0x04;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 2) //2: RDCVB
+	{
+		cmd[1] = 0x06;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 3) //3: RDCVC
+	{
+		cmd[1] = 0x08;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 4) //4: RDCVD
+	{
+		cmd[1] = 0x0A;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 5) //4: RDCVE
+	{
+		cmd[1] = 0x09;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 6) //4: RDCVF
+	{
+		cmd[1] = 0x0B;
+		cmd[0] = 0x00;
+	}
+
+	cmd_pec = pec15_calc(2, cmd);
+	cmd[2] = (uint8_t)(cmd_pec >> 8);
+	cmd[3] = (uint8_t)(cmd_pec);
+
+	cs_low(CS_PIN);
+	spi_write_read(cmd,4,data,(REG_LEN*total_ic));
+	cs_high(CS_PIN);
+}
+
+/* Helper function that parses voltage measurement registers */
+int8_t parse_cells(uint8_t current_ic, // Current IC
+					uint8_t cell_reg,  // Type of register
+					uint8_t cell_data[], // Unparsed data
+					uint16_t *cell_codes, // Parsed data
+					uint8_t *ic_pec // PEC error
+					)
+{
+	const uint8_t BYT_IN_REG = 6;
+	const uint8_t CELL_IN_REG = 3;
+	int8_t pec_error = 0;
+	uint16_t parsed_cell;
+	uint16_t received_pec;
+	uint16_t data_pec;
+	uint8_t data_counter = current_ic*NUM_RX_BYT; //data counter
+
+
+	for (uint8_t current_cell = 0; current_cell<CELL_IN_REG; current_cell++) // This loop parses the read back data into the register codes, it
+	{																		// loops once for each of the 3 codes in the register
+																			
+		parsed_cell = cell_data[data_counter] + (cell_data[data_counter + 1] << 8);//Each code is received as two bytes and is combined to
+																				   // create the parsed code
+		cell_codes[current_cell  + ((cell_reg - 1) * CELL_IN_REG)] = parsed_cell;
+
+		data_counter = data_counter + 2;                       //Because the codes are two bytes, the data counter
+															  //must increment by two for each parsed code
+	}
+	received_pec = (cell_data[data_counter] << 8) | cell_data[data_counter+1]; //The received PEC for the current_ic is transmitted as the 7th and 8th
+																			   //after the 6 cell voltage data bytes
+	data_pec = pec15_calc(BYT_IN_REG, &cell_data[(current_ic) * NUM_RX_BYT]);
+
+	if (received_pec != data_pec)
+	{
+		pec_error = 1;                             //The pec_error variable is simply set negative if any PEC errors
+		ic_pec[cell_reg-1]=1;
+	}
+	else
+	{
+		ic_pec[cell_reg-1]=0;
+	}
+	data_counter=data_counter+2;
+	
+	return(pec_error);
+}
+
+
+/*
+Reads and parses the ADBMS181x cell voltage registers.
+The function is used to read the parsed Cell voltages codes of the ADBMS181x. 
+This function will send the requested read commands parse the data 
+and store the cell voltages in c_codes variable.
+*/
+uint8_t ADBMS1818_rdcv(uint8_t reg, // Controls which cell voltage register is read back.
+                     uint8_t total_ic, // The number of ICs in the system
+                     cell_asic *ic // Array of the parsed cell codes
+                    )
+{
+	int8_t pec_error = 0;
+	uint8_t *cell_data;
+	uint8_t c_ic = 0;
+	cell_data = (uint8_t *) malloc((NUM_RX_BYT*total_ic)*sizeof(uint8_t));
+
+	if (reg == 0)
+	{
+		for (uint8_t cell_reg = 1; cell_reg<ic[0].ic_reg.num_cv_reg+1; cell_reg++) //Executes once for each of the ADBMS181x cell voltage registers
+		{
+			ADBMS1818_rdcv_reg(cell_reg, total_ic,cell_data );
+			for (int current_ic = 0; current_ic<total_ic; current_ic++)
+			{
+			if (ic->isospi_reverse == false)
+			{
+			  c_ic = current_ic;
+			}
+			else
+			{
+			  c_ic = total_ic - current_ic - 1;
+			}
+			pec_error = pec_error + parse_cells(current_ic,cell_reg, cell_data,
+												&ic[c_ic].cells.c_codes[0],
+												&ic[c_ic].cells.pec_match[0]);
+			}
+		}
+	}
+
+	else
+	{
+		ADBMS1818_rdcv_reg(reg, total_ic,cell_data);
+
+		for (int current_ic = 0; current_ic<total_ic; current_ic++)
+		{
+			if (ic->isospi_reverse == false)
+			{
+			c_ic = current_ic;
+			}
+			else
+			{
+			c_ic = total_ic - current_ic - 1;
+			}
+			pec_error = pec_error + parse_cells(current_ic,reg, &cell_data[8*c_ic],
+											  &ic[c_ic].cells.c_codes[0],
+											  &ic[c_ic].cells.pec_match[0]);
+		}
+	}
+	ADBMS1818_check_pec(total_ic,CELL,ic);
+	free(cell_data);
+
+	return(pec_error);
+}
+
+/* Starts cell voltage and SOC conversion */
+void ADBMS1818_adcvsc(uint8_t MD, //ADC Mode
+					uint8_t DCP //Discharge Permit
+					)
+{
+	uint8_t cmd[2];
+	uint8_t md_bits;
+	
+	md_bits = (MD & 0x02) >> 1;
+	cmd[0] = md_bits | 0x04;
+	md_bits = (MD & 0x01) << 7;
+	cmd[1] =  md_bits | 0x60 | (DCP<<4) | 0x07;
+	
+	cmd_68(cmd);
+}
+
+/*
+The function reads a single stat  register and stores the read data
+in the *data point as a byte array. This function is rarely used outside of
+the ADBMS181x_rdstat() command.
+*/
+void ADBMS1818_rdstat_reg(uint8_t reg, //Determines which stat register is read back
+                        uint8_t total_ic, //The number of ICs in the system
+                        uint8_t *data //Array of the unparsed stat codes
+                       )
+{
+	const uint8_t REG_LEN = 8; // number of bytes in the register + 2 bytes for the PEC
+	uint8_t cmd[4];
+	uint16_t cmd_pec;
+
+	if (reg == 1)     //Read back status group A
+	{
+		cmd[1] = 0x10;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 2)  //Read back status group B
+	{
+		cmd[1] = 0x12;
+		cmd[0] = 0x00;
+	}
+
+	else          //Read back status group A
+	{
+		cmd[1] = 0x10;
+		cmd[0] = 0x00;
+	}
+
+	cmd_pec = pec15_calc(2, cmd);
+	cmd[2] = (uint8_t)(cmd_pec >> 8);
+	cmd[3] = (uint8_t)(cmd_pec);
+
+	cs_low(CS_PIN);
+	spi_write_read(cmd,4,data,(REG_LEN*total_ic));
+	cs_high(CS_PIN);
+}
+
+/*
+Reads and parses the ADBMS181x stat registers.
+The function is used to read the  parsed Stat codes of the ADBMS181x. 
+This function will send the requested read commands parse the data 
+and store the gpio voltages in stat_codes variable.
+*/
+int8_t ADBMS1818_rdstat(uint8_t reg, //Determines which Stat  register is read back.
+                      uint8_t total_ic,//The number of ICs in the system
+                      cell_asic *ic //A two dimensional array of the stat codes.
+                     )
+
+{
+	const uint8_t BYT_IN_REG = 6;
+	const uint8_t STAT_IN_REG = 3;
+	uint8_t *data;
+	uint8_t data_counter = 0;
+	int8_t pec_error = 0;
+	uint16_t parsed_stat;
+	uint16_t received_pec;
+	uint16_t data_pec;
+	uint8_t c_ic = 0;
+	
+	data = (uint8_t *) malloc((12*total_ic)*sizeof(uint8_t));
+	
+	if (reg == 0)
+	{
+		for (uint8_t stat_reg = 1; stat_reg< 3; stat_reg++)                      //Executes once for each of the ADBMS181x stat voltage registers
+		{
+			data_counter = 0;
+			ADBMS1818_rdstat_reg(stat_reg, total_ic,data);                            //Reads the raw status register data into the data[] array
+		
+			for (uint8_t current_ic = 0 ; current_ic < total_ic; current_ic++)      // Executes for every ADBMS181x in the daisy chain
+			{																		// current_ic is used as the IC counter
+				if (ic->isospi_reverse == false)
+				{
+					c_ic = current_ic;
+				}
+				else
+				{
+					c_ic = total_ic - current_ic - 1;
+				}
+
+				if (stat_reg ==1)
+				{
+					for (uint8_t current_stat = 0; current_stat< STAT_IN_REG; current_stat++) // This loop parses the read back data into Status registers, 
+					{																		 // it loops once for each of the 3 stat codes in the register
+						parsed_stat = data[data_counter] + (data[data_counter+1]<<8);       //Each stat codes is received as two bytes and is combined to create the parsed status code
+						ic[c_ic].stat.stat_codes[current_stat] = parsed_stat;
+						data_counter=data_counter+2;                                       //Because stat codes are two bytes the data counter
+					}
+				}
+				else if (stat_reg == 2)
+				{
+					parsed_stat = data[data_counter] + (data[data_counter+1]<<8);          //Each stat is received as two bytes and is combined to create the parsed status code
+					data_counter = data_counter +2;
+					ic[c_ic].stat.stat_codes[3] = parsed_stat;
+					ic[c_ic].stat.flags[0] = data[data_counter++];
+					ic[c_ic].stat.flags[1] = data[data_counter++];
+					ic[c_ic].stat.flags[2] = data[data_counter++];
+					ic[c_ic].stat.mux_fail[0] = (data[data_counter] & 0x02)>>1;
+					ic[c_ic].stat.thsd[0] = data[data_counter++] & 0x01;
+				}
+			
+				received_pec = (data[data_counter]<<8)+ data[data_counter+1];        //The received PEC for the current_ic is transmitted as the 7th and 8th
+																					//after the 6 status data bytes
+				data_pec = pec15_calc(BYT_IN_REG, &data[current_ic*NUM_RX_BYT]);
+			
+				if (received_pec != data_pec)
+				{
+					pec_error = -1;                         //The pec_error variable is simply set negative if any PEC errors
+					ic[c_ic].stat.pec_match[stat_reg-1]=1;  //are detected in the received serial data
+					
+				}
+				else
+				{
+					ic[c_ic].stat.pec_match[stat_reg-1]=0;
+				}
+			
+				data_counter=data_counter+2;    //Because the transmitted PEC code is 2 bytes long the data_counter
+											//must be incremented by 2 bytes to point to the next ICs status data
+			}
+		}
+	}
+	else
+	{
+		ADBMS1818_rdstat_reg(reg, total_ic, data);
+		for (int current_ic = 0 ; current_ic < total_ic; current_ic++)            // Executes for every ADBMS181x in the daisy chain
+		{																		  // current_ic is used as an IC counter																			
+			if (ic->isospi_reverse == false)
+			{
+			c_ic = current_ic;
+			}
+			else
+			{
+			c_ic = total_ic - current_ic - 1;
+			}
+			if (reg ==1)
+			{
+				for (uint8_t current_stat = 0; current_stat< STAT_IN_REG; current_stat++) // This loop parses the read back data into Status voltages, it
+				{																		  // loops once for each of the 3 stat codes in the register
+					
+					parsed_stat = data[data_counter] + (data[data_counter+1]<<8);           //Each stat codes is received as two bytes and is combined to
+																							// create the parsed stat code
+			
+					ic[c_ic].stat.stat_codes[current_stat] = parsed_stat;
+					data_counter=data_counter+2;                     //Because stat codes are two bytes the data counter
+																	//must increment by two for each parsed stat code
+				}
+			}
+			else if (reg == 2)
+			{
+				parsed_stat = data[data_counter++] + (data[data_counter++]<<8); //Each stat codes is received as two bytes and is combined to
+				ic[c_ic].stat.stat_codes[3] = parsed_stat;
+				ic[c_ic].stat.flags[0] = data[data_counter++];
+				ic[c_ic].stat.flags[1] = data[data_counter++];
+				ic[c_ic].stat.flags[2] = data[data_counter++];
+				ic[c_ic].stat.mux_fail[0] = (data[data_counter] & 0x02)>>1;
+				ic[c_ic].stat.thsd[0] = data[data_counter++] & 0x01;
+			}
+		
+			received_pec = (data[data_counter]<<8)+ data[data_counter+1]; //The received PEC for the current_ic is transmitted as the 7th and 8th
+																		  //after the 6 status data bytes
+			data_pec = pec15_calc(BYT_IN_REG, &data[current_ic*NUM_RX_BYT]);
+			if (received_pec != data_pec)
+			{
+				pec_error = -1;                  //The pec_error variable is simply set negative if any PEC errors
+				ic[c_ic].stat.pec_match[reg-1]=1;
+			}
+		
+			data_counter=data_counter+2;
+		}
+	}
+	ADBMS1818_check_pec(total_ic,STAT,ic);
+	
+	free(data);
+	
+	return (pec_error);
+}
+

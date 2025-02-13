@@ -5,6 +5,15 @@
 #include "adbms1818_self.h"
 #include <SPI.h>
 
+/************************* Defines *****************************/
+#define ENABLED 1
+#define DISABLED 0
+#define DATALOG_ENABLED 1
+#define DATALOG_DISABLED 0
+#define PWM 1
+#define SCTL 2
+
+/**************** Local Function Declaration *******************/
 void print_menu(void);
 void print_wrconfig(void);
 void print_wrconfigb(void);
@@ -15,6 +24,8 @@ void check_error(int error);
 void print_rxconfig(void);
 void print_rxconfigb();
 void print_conv_time(uint32_t conv_time);
+void print_cells(uint8_t datalog_en);
+void print_sumofcells(void);
 
 
 /*******************************************************************
@@ -32,6 +43,9 @@ const uint8_t ADC_CONVERSION_MODE = MD_7KHZ_3KHZ; //!< ADC
 
 const uint8_t ADC_DCP = DCP_DISABLED; //!< Discharge Permitted
 const uint8_t CELL_CH_TO_CONVERT = CELL_CH_ALL; //!< Channel Selection for ADC conversion
+const uint8_t SEL_ALL_REG = REG_ALL; //!< Register Selection
+const uint8_t SEL_REG_A = REG_1; //!< Register Selection
+const uint8_t SEL_REG_B = REG_2; //!< Register Selection
 
 /*************************************************************************
   Set configuration register. Refer to the data sheet
@@ -76,20 +90,22 @@ void setup() {
   digitalWrite(6,LOW);
   
   // Initialize ADBMS1818
-  BMS_IC[0].isospi_reverse = false; //try ...doesnt matter when only 1 bms ic
 
   ADBMS1818_init_cfg(TOTAL_IC, BMS_IC);
   ADBMS1818_init_cfgb(TOTAL_IC, BMS_IC);
   //check configuration here:
-  // for (uint8_t current_ic = 0; current_ic < TOTAL_IC; current_ic++)
-  // {
-  //   ADBMS1818_set_cfgr(current_ic, BMS_IC, REFON, ADCOPT, GPIOBITS_A, DCCBITS_A, DCTOBITS, UV, OV);
-  //   ADBMS1818_set_cfgrb(current_ic, BMS_IC, FDRF, DTMEN, PSBITS, GPIOBITS_B, DCCBITS_B);
-  // }
-  // ADBMS1818_reset_crc_count(TOTAL_IC, BMS_IC);
-  // ADBMS1818_init_reg_limits(TOTAL_IC, BMS_IC);
+  for (uint8_t current_ic = 0; current_ic < TOTAL_IC; current_ic++)
+  {
+    ADBMS1818_set_cfgr(current_ic, BMS_IC, REFON, ADCOPT, GPIOBITS_A, DCCBITS_A, DCTOBITS, UV, OV);
+    ADBMS1818_set_cfgrb(current_ic, BMS_IC, FDRF, DTMEN, PSBITS, GPIOBITS_B, DCCBITS_B);
+  }
+  ADBMS1818_reset_crc_count(TOTAL_IC, BMS_IC);
+  ADBMS1818_init_reg_limits(TOTAL_IC, BMS_IC);
 
-  // wakeup_sleep(TOTAL_IC);
+  BMS_IC[0].isospi_reverse = false; //try ...doesnt matter when only 1 bms ic
+  BMS_IC[0].ic_reg.cell_channels = 14;
+
+  wakeup_sleep(TOTAL_IC);
   print_menu();
 }
 
@@ -170,6 +186,28 @@ void run_command(uint32_t cmd)
       ADBMS1818_adcv(ADC_CONVERSION_MODE, ADC_DCP, CELL_CH_TO_CONVERT);
       conv_time = ADBMS1818_pollAdc();
       print_conv_time(conv_time);
+      break;
+
+    case 4: // Read Cell Voltage Registers
+      wakeup_sleep(TOTAL_IC);
+      error = ADBMS1818_rdcv(SEL_ALL_REG, TOTAL_IC, BMS_IC); // Set to read back all cell voltage registers
+      check_error(error);
+      print_cells(DATALOG_DISABLED);
+      break;
+
+    case 10: //Start Combined Cell Voltage and Sum of cells
+      wakeup_sleep(TOTAL_IC);
+      ADBMS1818_adcvsc(ADC_CONVERSION_MODE, ADC_DCP);
+      conv_time = ADBMS1818_pollAdc();
+      print_conv_time(conv_time);
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdcv(SEL_ALL_REG, TOTAL_IC, BMS_IC); // Set to read back all cell voltage registers
+      check_error(error);
+      print_cells(DATALOG_DISABLED);
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdstat(SEL_REG_A, TOTAL_IC, BMS_IC); // Set to read back stat register A
+      check_error(error);
+      print_sumofcells();
       break;
 
     default:
@@ -361,6 +399,58 @@ void print_conv_time(uint32_t conv_time)
   Serial.println(F("ms \n"));
 }
 
+/*!************************************************************
+  \brief Prints cell voltage codes to the serial port
+  @return void
+ *************************************************************/
+void print_cells(uint8_t datalog_en)
+{
+  for (int current_ic = 0 ; current_ic < TOTAL_IC; current_ic++)
+  {
+    if (datalog_en == 0)
+    {
+      Serial.print(" IC ");
+      Serial.print(current_ic + 1, DEC);
+      Serial.print(", ");
+      Serial.println(BMS_IC[0].ic_reg.cell_channels);
+      for (int i = 0; i < BMS_IC[0].ic_reg.cell_channels; i++)
+      {
+        Serial.print(" C");
+        Serial.print(i + 1, DEC);
+        Serial.print(":");
+        Serial.print(BMS_IC[current_ic].cells.c_codes[i] * 0.0001, 4);
+        Serial.print(",");
+      }
+      Serial.println();
+    }
+    else
+    {
+      Serial.print(" Cells, ");
+      for (int i = 0; i < BMS_IC[0].ic_reg.cell_channels; i++)
+      {
+        Serial.print(BMS_IC[current_ic].cells.c_codes[i] * 0.0001, 4);
+        Serial.print(",");
+      }
+    }
+  }
+  Serial.println("\n");
+}
+
+/*!****************************************************************************
+  \brief Prints Status voltage codes for SOC onto the serial port
+ *****************************************************************************/
+void print_sumofcells(void)
+{
+  for (int current_ic = 0 ; current_ic < TOTAL_IC; current_ic++)
+  {
+    Serial.print(F(" IC "));
+    Serial.print(current_ic + 1, DEC);
+    Serial.print(F(" SOC:"));
+    Serial.print(BMS_IC[current_ic].stat.stat_codes[0] * 0.0001 * 30, 4);
+    Serial.print(F(","));
+  }
+  Serial.println("\n");
+}
 
 
 // Read Cell voltages
