@@ -5,6 +5,7 @@
 #include "adbms1818_self.h"
 #include <SPI.h>
 
+void print_menu(void);
 void print_wrconfig(void);
 void print_wrconfigb(void);
 void serial_print_hex(uint8_t data);
@@ -66,7 +67,7 @@ void setup() {
 
   // Configure the SPI
   SPI.begin();
-  SPI.setClockDivider(SPI_CLOCK_DIV8);
+  SPI.setClockDivider(SPI_CLOCK_DIV128);
   SPI.setDataMode(SPI_MODE3); // CPHA = 1, CPOL = 1
   SPI.setBitOrder(MSBFIRST); // Most significant bit first
   pinMode(CS_PIN, OUTPUT);
@@ -75,17 +76,21 @@ void setup() {
   digitalWrite(6,LOW);
   
   // Initialize ADBMS1818
+  BMS_IC[0].isospi_reverse = false; //try ...doesnt matter when only 1 bms ic
+
   ADBMS1818_init_cfg(TOTAL_IC, BMS_IC);
   ADBMS1818_init_cfgb(TOTAL_IC, BMS_IC);
-    for (uint8_t current_ic = 0; current_ic < TOTAL_IC; current_ic++)
-  {
-    ADBMS1818_set_cfgr(current_ic, BMS_IC, REFON, ADCOPT, GPIOBITS_A, DCCBITS_A, DCTOBITS, UV, OV);
-    ADBMS1818_set_cfgrb(current_ic, BMS_IC, FDRF, DTMEN, PSBITS, GPIOBITS_B, DCCBITS_B);
-  }
-  ADBMS1818_reset_crc_count(TOTAL_IC, BMS_IC);
-  ADBMS1818_init_reg_limits(TOTAL_IC, BMS_IC);
+  //check configuration here:
+  // for (uint8_t current_ic = 0; current_ic < TOTAL_IC; current_ic++)
+  // {
+  //   ADBMS1818_set_cfgr(current_ic, BMS_IC, REFON, ADCOPT, GPIOBITS_A, DCCBITS_A, DCTOBITS, UV, OV);
+  //   ADBMS1818_set_cfgrb(current_ic, BMS_IC, FDRF, DTMEN, PSBITS, GPIOBITS_B, DCCBITS_B);
+  // }
+  // ADBMS1818_reset_crc_count(TOTAL_IC, BMS_IC);
+  // ADBMS1818_init_reg_limits(TOTAL_IC, BMS_IC);
 
-  wakeup_sleep(TOTAL_IC);
+  // wakeup_sleep(TOTAL_IC);
+  print_menu();
 }
 
 void loop() {
@@ -106,7 +111,7 @@ void loop() {
     if (user_command == 'm')
     {
       Serial.println("Menu...");
-      //print_menu();
+      print_menu();
     }
     else
     { 
@@ -139,12 +144,12 @@ void run_command(uint32_t cmd)
 
       wakeup_idle(TOTAL_IC);
       error = ADBMS1818_rdcfg(TOTAL_IC, BMS_IC);
-      Serial.print("Error in RDCFG: ");
+      Serial.print("Check for Error in RDCFG: ");
       check_error(error);Serial.println();
       print_rxconfig();
 
       error = ADBMS1818_rdcfgb(TOTAL_IC, BMS_IC); // Read Configuration Register B
-      Serial.print("Error in  RDCFB: ");
+      Serial.print("Check for Error in  RDCFB: ");
       check_error(error);Serial.println();
       print_rxconfigb();
 
@@ -173,6 +178,28 @@ void run_command(uint32_t cmd)
       
       break;
   }
+}
+
+/*!*********************************
+  \brief Prints the main menu
+  @return void
+***********************************/
+void print_menu(void)
+{
+  Serial.println(F("List of ADBMS1818 Command:"));
+  Serial.println(F("Write and Read Configuration: 1                            |Loop measurements with data-log output : 12                            |Set Discharge: 23   "));
+  Serial.println(F("Read Configuration: 2                                      |Clear Registers: 13                                                    |Clear Discharge: 24   "));
+  Serial.println(F("Start Cell Voltage Conversion: 3                           |Run Mux Self Test: 14                                                  |Write and Read of PWM : 25"));
+  Serial.println(F("Read Cell Voltages: 4                                      |Run ADC Self Test: 15                                                  |Write and  Read of S control : 26"));
+  Serial.println(F("Start Aux Voltage Conversion: 5                            |ADC overlap Test : 16                                                  |Clear S control register : 27"));
+  Serial.println(F("Read Aux Voltages: 6                                       |Run Digital Redundancy Test: 17                                        |SPI Communication  : 28"));
+  Serial.println(F("Start Stat Voltage Conversion: 7                           |Open Wire Test for single cell detection: 18                           |I2C Communication Write to Slave :29"));
+  Serial.println(F("Read Stat Voltages: 8                                      |Open Wire Test for multiple cell or two consecutive cells detection:19 |I2C Communication Read from Slave :30"));
+  Serial.println(F("Start Combined Cell Voltage and GPIO1, GPIO2 Conversion: 9 |Open wire for Auxiliary Measurement: 20                                |Enable MUTE : 31"));
+  Serial.println(F("Start  Cell Voltage and Sum of cells : 10                  |Print PEC Counter: 21                                                  |Disable MUTE : 32"));
+  Serial.println(F("Loop Measurements: 11                                      |Reset PEC Counter: 22                                                  |Set or reset the gpio pins: 33 \n "));
+  Serial.println(F("Print 'm' for menu"));
+  Serial.println(F("Please enter command: \n "));
 }
 
 
@@ -264,6 +291,10 @@ void check_error(int error)
   if (error == -1)
   {
     Serial.println(F("A PEC error was detected in the received data"));
+  }
+  else
+  {
+    Serial.println("No error detected");
   }
 }
 

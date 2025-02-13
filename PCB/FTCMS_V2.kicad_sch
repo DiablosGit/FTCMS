@@ -3703,6 +3703,11 @@
     (effects (font (size 3 3)) (justify left bottom))
     (uuid 2a2c9297-38ae-4ade-971c-6c08fe9a8828)
   )
+  (text "Connecting ISOMD to V– configures the ADBMS1818 for 4-wire SPI mode."
+    (at 280.035 127 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 2b1a870a-3b72-465c-a6b3-e6cd2aa0b3cb)
+  )
   (text "Fragen" (at 32.766 192.913 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 2bcbce03-68fa-4059-aea5-21d5b15db94b)

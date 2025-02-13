@@ -74,7 +74,7 @@ void wakeup_sleep(uint8_t total_ic) //Number of ICs in the system
 	   cs_low(CS_PIN);
 	   delay_u(300); // Guarantees the ADBMS181x will be in standby
 	   cs_high(CS_PIN);
-	   delay_u(10);
+	   //delay_u(10);
 	}
 	// uint8_t cmd[4];
 	// uint16_t cmd_pec;
@@ -238,8 +238,11 @@ void ADBMS1818_wrcfg(uint8_t total_ic, //The number of ICs being written to
 	uint8_t write_count = 0;
 	uint8_t c_ic = 0;
 	
+
 	for (uint8_t current_ic = 0; current_ic<total_ic; current_ic++)
 	{
+		//hier eventuell für jeden durchgang inkrement ausgeben
+		Serial.print("Current IC: ");
 		if (ic->isospi_reverse == false)
 		{
 			c_ic = current_ic;
@@ -248,6 +251,7 @@ void ADBMS1818_wrcfg(uint8_t total_ic, //The number of ICs being written to
 		{
 			c_ic = total_ic - current_ic - 1;
 		}
+		Serial.println(c_ic);
 		
 		for (uint8_t data = 0; data<6; data++)
 		{
