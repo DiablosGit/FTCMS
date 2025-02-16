@@ -64,11 +64,11 @@
       39,
       40
     ],
-    "visible_layers": "fffffff_ffffffff",
-    "zone_display_mode": 0
+    "visible_layers": "ffdffff_ffffffff",
+    "zone_display_mode": 1
   },
   "meta": {
-    "filename": "FTCMS_V2_1.kicad_prl",
+    "filename": "FTCMS_V2.2.kicad_prl",
     "version": 3
   },
   "project": {
