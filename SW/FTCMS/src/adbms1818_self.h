@@ -17,6 +17,14 @@
 #define CELL_CH_5and11 5
 #define CELL_CH_6and12 6
 
+#define AUX_CH_ALL 0
+#define AUX_CH_GPIO1 1
+#define AUX_CH_GPIO2 2
+#define AUX_CH_GPIO3 3
+#define AUX_CH_GPIO4 4
+#define AUX_CH_GPIO5 5
+#define AUX_CH_VREF2 6
+
 #define REG_ALL 0
 #define REG_1 1
 #define REG_2 2
@@ -344,3 +352,49 @@ void ADBMS1818_rdstat_reg(uint8_t reg, //!< Determines which stat register is re
                         uint8_t total_ic, //!< The number of ICs in the system
                         uint8_t *data //!< Array of the unparsed stat codes
                        );
+
+/*!
+ Start a GPIO and Vref2 Conversion  
+ @return void 
+ */
+void ADBMS1818_adax(uint8_t MD, //!< ADC Conversion Mode
+				  uint8_t CHG //!< Sets which GPIO channels are converted
+                  );
+
+/*!
+ Start an GPIO Redundancy test  
+ @return void 
+ */
+void ADBMS1818_adaxd(uint8_t MD, //!< ADC Conversion Mode
+				   uint8_t CHG //!< Sets which GPIO channels are converted
+				   );
+
+/*! Reads and parses the ADBMS1818 auxiliary registers.
+ @return  int8_t, pec_error PEC Status
+   0: No PEC error detected
+  -1: PEC error detected, retry read
+  */ 
+int8_t ADBMS1818_rdaux(uint8_t reg, //!< Controls which GPIO voltage register is read back
+                     uint8_t nIC, //!< The number of ICs in the daisy chain
+                     cell_asic *ic //!< A two dimensional array of the parsed gpio voltage codes
+                    );
+
+/*! 
+ Read the raw data from the ADBMS181x auxiliary register
+ The function reads a single GPIO voltage register and stores the read data in the *data point as a byte array. 
+ This function is rarely used outside of the ADBMS181x_rdaux() command.
+ @return void 
+ */	
+void ADBMS1818_rdaux_reg(  uint8_t reg, //!< Determines which GPIO voltage register is read back
+                         uint8_t total_ic, //!< The number of ICs in the system
+                         uint8_t *data //!< Array of the unparsed auxiliary codes
+                      );
+
+/*!
+ Helper Function that counts overall PEC errors and register/IC PEC errors
+ @return void	 
+ */ 
+void ADBMS181x_check_pec(uint8_t total_ic, //!< Number of ICs in the daisy chain
+                       uint8_t reg, //!< Type of register
+                       cell_asic *ic //!< A two dimensional array that will store the data
+					   );

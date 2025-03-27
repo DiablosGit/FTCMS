@@ -26,6 +26,7 @@ void print_rxconfigb();
 void print_conv_time(uint32_t conv_time);
 void print_cells(uint8_t datalog_en);
 void print_sumofcells(void);
+void print_aux(uint8_t datalog_en);
 
 
 /*******************************************************************
@@ -43,6 +44,7 @@ const uint8_t ADC_CONVERSION_MODE = MD_7KHZ_3KHZ; //!< ADC
 
 const uint8_t ADC_DCP = DCP_DISABLED; //!< Discharge Permitted
 const uint8_t CELL_CH_TO_CONVERT = CELL_CH_ALL; //!< Channel Selection for ADC conversion
+const uint8_t AUX_CH_TO_CONVERT = AUX_CH_ALL; //!< Channel Selection for ADC conversion
 const uint8_t SEL_ALL_REG = REG_ALL; //!< Register Selection
 const uint8_t SEL_REG_A = REG_1; //!< Register Selection
 const uint8_t SEL_REG_B = REG_2; //!< Register Selection
@@ -194,6 +196,21 @@ void run_command(uint32_t cmd)
       check_error(error);
       print_cells(DATALOG_DISABLED);
       break;
+
+    case 5: // Start GPIO ADC Measurement
+      wakeup_sleep(TOTAL_IC);
+      ADBMS1818_adax(ADC_CONVERSION_MODE, AUX_CH_TO_CONVERT);
+      conv_time = ADBMS1818_pollAdc();
+      print_conv_time(conv_time);
+      break;
+
+    case 6: // Read AUX Voltage Registers
+      wakeup_sleep(TOTAL_IC);
+      error = ADBMS1818_rdaux(SEL_ALL_REG, TOTAL_IC, BMS_IC); // Set to read back all aux registers
+      check_error(error);
+      print_aux(DATALOG_DISABLED);
+      break;
+
 
     case 10: //Start Combined Cell Voltage and Sum of cells
       wakeup_sleep(TOTAL_IC);
@@ -448,6 +465,58 @@ void print_sumofcells(void)
     Serial.print(F(" SOC:"));
     Serial.print(BMS_IC[current_ic].stat.stat_codes[0] * 0.0001 * 30, 4);
     Serial.print(F(","));
+  }
+  Serial.println("\n");
+}
+
+/*!****************************************************************************
+  \brief Prints GPIO voltage codes and Vref2 voltage code onto the serial port
+  @return void
+ *****************************************************************************/
+void print_aux(uint8_t datalog_en)
+{
+  for (int current_ic = 0 ; current_ic < TOTAL_IC; current_ic++)
+  {
+    if (datalog_en == 0)
+    {
+      Serial.print(" IC ");
+      Serial.print(current_ic + 1, DEC);
+      for (int i = 0; i < 5; i++)
+      {
+        Serial.print(F(" GPIO-"));
+        Serial.print(i + 1, DEC);
+        Serial.print(":");
+        Serial.print(BMS_IC[current_ic].aux.a_codes[i] * 0.0001, 4);
+        Serial.print(",");
+      }
+
+      for (int i = 6; i < 10; i++)
+      {
+        Serial.print(F(" GPIO-"));
+        Serial.print(i, DEC);
+        Serial.print(":");
+        Serial.print(BMS_IC[current_ic].aux.a_codes[i] * 0.0001, 4);
+      }
+
+      Serial.print(F(" Vref2"));
+      Serial.print(":");
+      Serial.print(BMS_IC[current_ic].aux.a_codes[5] * 0.0001, 4);
+      Serial.println();
+
+      Serial.print(" OV/UV Flags : 0x");
+      Serial.print((uint8_t)BMS_IC[current_ic].aux.a_codes[11], HEX);
+      Serial.println();
+    }
+    else
+    {
+      Serial.print(" AUX, ");
+
+      for (int i = 0; i < 12; i++)
+      {
+        Serial.print((uint8_t)BMS_IC[current_ic].aux.a_codes[i] * 0.0001, 4);
+        Serial.print(",");
+      }
+    }
   }
   Serial.println("\n");
 }

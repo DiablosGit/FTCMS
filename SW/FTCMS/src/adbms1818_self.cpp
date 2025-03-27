@@ -1030,3 +1030,146 @@ int8_t ADBMS1818_rdstat(uint8_t reg, //Determines which Stat  register is read b
 	return (pec_error);
 }
 
+/* Start ADC Conversion for GPIO and Vref2  */
+void ADBMS1818_adax(uint8_t MD, //ADC Mode
+				  uint8_t CHG //GPIO Channels to be measured
+				  )
+{
+	uint8_t cmd[4];
+	uint8_t md_bits;
+	
+	md_bits = (MD & 0x02) >> 1;
+	cmd[0] = md_bits + 0x04;
+	md_bits = (MD & 0x01) << 7;
+	cmd[1] = md_bits + 0x60 + CHG ;
+	
+	cmd_68(cmd);
+}
+
+/* Start an GPIO Redundancy test */
+void ADBMS1818_adaxd(uint8_t MD, //ADC Mode
+				   uint8_t CHG //GPIO Channels to be measured
+				   )
+{
+	uint8_t cmd[4];
+	uint8_t md_bits;
+
+	md_bits = (MD & 0x02) >> 1;
+	cmd[0] = md_bits + 0x04;
+	md_bits = (MD & 0x01) << 7;
+	cmd[1] = md_bits + CHG ;
+
+	cmd_68(cmd);
+}
+
+/*
+The function reads a single GPIO voltage register and stores the read data
+in the *data point as a byte array. This function is rarely used outside of
+the ADBMS181x_rdaux() command.
+*/
+void ADBMS1818_rdaux_reg(uint8_t reg, //Determines which GPIO voltage register is read back
+                       uint8_t total_ic, //The number of ICs in the system
+                       uint8_t *data //Array of the unparsed auxiliary codes
+                      )
+{
+	const uint8_t REG_LEN = 8; // Number of bytes in the register + 2 bytes for the PEC
+	uint8_t cmd[4];
+	uint16_t cmd_pec;
+
+	if (reg == 1)     //Read back auxiliary group A
+	{
+		cmd[1] = 0x0C;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 2)  //Read back auxiliary group B
+	{
+		cmd[1] = 0x0E;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 3)  //Read back auxiliary group C
+	{
+		cmd[1] = 0x0D;
+		cmd[0] = 0x00;
+	}
+	else if (reg == 4)  //Read back auxiliary group D
+	{
+		cmd[1] = 0x0F;
+		cmd[0] = 0x00;
+	}
+	else          //Read back auxiliary group A
+	{
+		cmd[1] = 0x0C;
+		cmd[0] = 0x00;
+	}
+
+	cmd_pec = pec15_calc(2, cmd);
+	cmd[2] = (uint8_t)(cmd_pec >> 8);
+	cmd[3] = (uint8_t)(cmd_pec);
+
+	cs_low(CS_PIN);
+	spi_write_read(cmd,4,data,(REG_LEN*total_ic));
+	cs_high(CS_PIN);
+}
+
+
+/*
+The function is used to read the  parsed GPIO codes of the ADBMS181x. 
+This function will send the requested read commands parse the data 
+and store the gpio voltages in a_codes variable.
+*/
+int8_t ADBMS1818_rdaux(uint8_t reg, //Determines which GPIO voltage register is read back.
+                     uint8_t total_ic,//The number of ICs in the system
+                     cell_asic *ic//A two dimensional array of the gpio voltage codes.
+                    )
+{
+	uint8_t *data;
+	int8_t pec_error = 0;
+	uint8_t c_ic =0;
+	data = (uint8_t *) malloc((NUM_RX_BYT*total_ic)*sizeof(uint8_t));
+
+	if (reg == 0)
+	{
+		for (uint8_t gpio_reg = 1; gpio_reg<ic[0].ic_reg.num_gpio_reg+1; gpio_reg++) //Executes once for each of the ADBMS181x aux voltage registers
+		{
+			ADBMS1818_rdaux_reg(gpio_reg, total_ic,data);                 //Reads the raw auxiliary register data into the data[] array
+			for (int current_ic = 0; current_ic<total_ic; current_ic++)
+			{
+				if (ic->isospi_reverse == false)
+				{
+				  c_ic = current_ic;
+				}
+				else
+				{
+				  c_ic = total_ic - current_ic - 1;
+				}
+				pec_error = parse_cells(current_ic,gpio_reg, data,
+										&ic[c_ic].aux.a_codes[0],
+										&ic[c_ic].aux.pec_match[0]);
+			}
+		}
+	}
+	else
+	{
+		ADBMS1818_rdaux_reg(reg, total_ic, data);
+
+		for (int current_ic = 0; current_ic<total_ic; current_ic++)
+		{
+			if (ic->isospi_reverse == false)
+			{
+			c_ic = current_ic;
+			}
+			else
+			{
+			c_ic = total_ic - current_ic - 1;
+			}
+			pec_error = parse_cells(current_ic,reg, data,
+								  &ic[c_ic].aux.a_codes[0],
+								  &ic[c_ic].aux.pec_match[0]);
+		}
+	}
+	ADBMS1818_check_pec(total_ic,AUX,ic);
+	free(data);
+
+	return (pec_error);
+}
+
