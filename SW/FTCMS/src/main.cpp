@@ -14,6 +14,7 @@
 #define SCTL 2
 
 /**************** Local Function Declaration *******************/
+
 void print_menu(void);
 void print_wrconfig(void);
 void print_wrconfigb(void);
@@ -27,6 +28,10 @@ void print_conv_time(uint32_t conv_time);
 void print_cells(uint8_t datalog_en);
 void print_sumofcells(void);
 void print_aux(uint8_t datalog_en);
+void print_aux1(uint8_t datalog_en);
+void print_stat(void);
+void print_pec_error_count(void);
+void measurement_loop(uint8_t datalog_en);
 
 
 /*******************************************************************
@@ -45,9 +50,38 @@ const uint8_t ADC_CONVERSION_MODE = MD_7KHZ_3KHZ; //!< ADC
 const uint8_t ADC_DCP = DCP_DISABLED; //!< Discharge Permitted
 const uint8_t CELL_CH_TO_CONVERT = CELL_CH_ALL; //!< Channel Selection for ADC conversion
 const uint8_t AUX_CH_TO_CONVERT = AUX_CH_ALL; //!< Channel Selection for ADC conversion
+const uint8_t STAT_CH_TO_CONVERT = STAT_CH_ALL; //!< Channel Selection for ADC conversion
 const uint8_t SEL_ALL_REG = REG_ALL; //!< Register Selection
 const uint8_t SEL_REG_A = REG_1; //!< Register Selection
 const uint8_t SEL_REG_B = REG_2; //!< Register Selection
+
+
+const uint16_t MEASUREMENT_LOOP_TIME = 200; //!< Loop Time in milliseconds(ms)
+
+//Under Voltage and Over Voltage Thresholds
+const uint16_t OV_THRESHOLD = 41000; //!< Over voltage threshold ADC Code. LSB = 0.0001 ---(4.1V)
+const uint16_t UV_THRESHOLD = 20000; //!< Under voltage threshold ADC Code. LSB = 0.0001 ---(3V)
+
+//Loop Measurement Setup. These Variables are ENABLED or DISABLED. Remember ALL CAPS
+const uint8_t WRITE_CONFIG = ENABLED;  //!< This is to ENABLED or DISABLED writing into to configuration registers in a continuous loop
+const uint8_t READ_CONFIG = ENABLED; //!< This is to ENABLED or DISABLED reading the configuration registers in a continuous loop
+const uint8_t MEASURE_CELL = ENABLED; //!< This is to ENABLED or DISABLED measuring the cell voltages in a continuous loop
+const uint8_t MEASURE_AUX = DISABLED; //!< This is to ENABLED or DISABLED reading the auxiliary registers in a continuous loop
+const uint8_t MEASURE_STAT = DISABLED; //!< This is to ENABLED or DISABLED reading the status registers in a continuous loop
+const uint8_t PRINT_PEC = DISABLED; //!< This is to ENABLED or DISABLED printing the PEC Error Count in a continuous loop
+
+/************************************
+  END SETUP
+*************************************/
+
+
+/*******************************************************
+  Global Battery Variables received from 181x commands
+  These variables store the results from the ADBMS1818
+  register reads and the array lengths must be based
+  on the number of ICs on the stack
+ ******************************************************/
+cell_asic BMS_IC[TOTAL_IC]; //!< Global Battery Variable
 
 /*************************************************************************
   Set configuration register. Refer to the data sheet
@@ -65,16 +99,6 @@ bool DCTOBITS[4] = {true, false, true, false}; //!< Discharge time value //Dcto 
 bool FDRF = false; //!< Force Digital Redundancy Failure Bit
 bool DTMEN = true; //!< Enable Discharge Timer Monitor
 bool PSBITS[2] = {false, false}; //!< Digital Redundancy Path Selection//ps-0,1
-
-
-
-/*******************************************************
-  Global Battery Variables received from 181x commands
-  These variables store the results from the ADBMS1818
-  register reads and the array lengths must be based
-  on the number of ICs on the stack
- ******************************************************/
-cell_asic BMS_IC[TOTAL_IC]; //!< Global Battery Variable
 
 
 void setup() {
@@ -209,8 +233,37 @@ void run_command(uint32_t cmd)
       error = ADBMS1818_rdaux(SEL_ALL_REG, TOTAL_IC, BMS_IC); // Set to read back all aux registers
       check_error(error);
       print_aux(DATALOG_DISABLED);
+      //TODO: write convert_aux_temp_to_degreesCelsius()
       break;
 
+    case 7: // Start Status ADC Measurement
+      wakeup_sleep(TOTAL_IC);
+      ADBMS1818_adstat(ADC_CONVERSION_MODE, STAT_CH_TO_CONVERT);
+      conv_time = ADBMS1818_pollAdc();
+      print_conv_time(conv_time);
+      break;
+
+    case 8: // Read Status registers
+      wakeup_sleep(TOTAL_IC);
+      error = ADBMS1818_rdstat(SEL_ALL_REG, TOTAL_IC, BMS_IC); // Set to read back all stat registers
+      check_error(error);
+      print_stat();
+      break;
+
+    case 9: // Start Combined Cell Voltage and GPIO1, GPIO2 Conversion and Poll Status
+      wakeup_sleep(TOTAL_IC);
+      ADBMS1818_adcvax(ADC_CONVERSION_MODE, ADC_DCP);
+      conv_time = ADBMS1818_pollAdc();
+      print_conv_time(conv_time);
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdcv(SEL_ALL_REG, TOTAL_IC, BMS_IC); // Set to read back all cell voltage registers
+      check_error(error);
+      print_cells(DATALOG_DISABLED);
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdaux(SEL_REG_A, TOTAL_IC, BMS_IC); // Set to read back aux register A
+      check_error(error);
+      print_aux1(DATALOG_DISABLED);
+      break;
 
     case 10: //Start Combined Cell Voltage and Sum of cells
       wakeup_sleep(TOTAL_IC);
@@ -225,6 +278,22 @@ void run_command(uint32_t cmd)
       error = ADBMS1818_rdstat(SEL_REG_A, TOTAL_IC, BMS_IC); // Set to read back stat register A
       check_error(error);
       print_sumofcells();
+      break;
+
+    case 11: // Loop Measurements of configuration register or cell voltages or auxiliary register or status register without data-log output
+      wakeup_sleep(TOTAL_IC);
+      ADBMS1818_wrcfg(TOTAL_IC, BMS_IC);
+      ADBMS1818_wrcfgb(TOTAL_IC, BMS_IC);
+      measurement_loop(DATALOG_DISABLED);
+      print_menu();
+      break;
+
+    case 12: // Data-log print option Loop Measurements of configuration register or cell voltages or auxiliary register or status register
+      wakeup_sleep(TOTAL_IC);
+      ADBMS1818_wrcfg(TOTAL_IC, BMS_IC);
+      ADBMS1818_wrcfgb(TOTAL_IC, BMS_IC);
+      measurement_loop(DATALOG_ENABLED);
+      print_menu();
       break;
 
     default:
@@ -519,6 +588,181 @@ void print_aux(uint8_t datalog_en)
     }
   }
   Serial.println("\n");
+}
+
+/*!****************************************************************************
+  \brief Prints GPIO voltage codes (GPIO 1 & 2)
+  @return void
+ *****************************************************************************/
+void print_aux1(uint8_t datalog_en)
+{
+
+  for (int current_ic = 0 ; current_ic < TOTAL_IC; current_ic++)
+  {
+    if (datalog_en == 0)
+    {
+      Serial.print(" IC ");
+      Serial.print(current_ic + 1, DEC);
+      for (int i = 0; i < 2; i++)
+      {
+        Serial.print(F(" GPIO-"));
+        Serial.print(i + 1, DEC);
+        Serial.print(":");
+        Serial.print(BMS_IC[current_ic].aux.a_codes[i] * 0.0001, 4);
+        Serial.print(",");
+      }
+    }
+    else
+    {
+      Serial.print("AUX, ");
+
+      for (int i = 0; i < 12; i++)
+      {
+        Serial.print(BMS_IC[current_ic].aux.a_codes[i] * 0.0001, 4);
+        Serial.print(",");
+      }
+    }
+  }
+  Serial.println("\n");
+}
+
+/*!****************************************************************************
+  \brief Prints Status voltage codes and Vref2 voltage code onto the serial port
+  @return void
+ *****************************************************************************/
+void print_stat(void)
+{
+  for (int current_ic = 0 ; current_ic < TOTAL_IC; current_ic++)
+  {
+    double itmp;
+
+    Serial.print(F(" IC "));
+    Serial.print(current_ic + 1, DEC);
+    Serial.print(F(" SOC:"));
+    Serial.print(BMS_IC[current_ic].stat.stat_codes[0] * 0.0001 * 30, 4);
+    Serial.print(F(","));
+    Serial.print(F(" Itemp:"));
+    itmp = (double)((BMS_IC[current_ic].stat.stat_codes[1] * (0.0001 / 0.0076)) - 276);   //Internal Die Temperature(°C) = ITMP • (100 µV / 7.6mV)°C - 276°C
+    Serial.print(itmp, 4);
+    Serial.print(F(","));
+    Serial.print(F(" VregA:"));
+    Serial.print(BMS_IC[current_ic].stat.stat_codes[2] * 0.0001, 4);
+    Serial.print(F(","));
+    Serial.print(F(" VregD:"));
+    Serial.print(BMS_IC[current_ic].stat.stat_codes[3] * 0.0001, 4);
+    Serial.println();
+    Serial.print(F(" OV/UV Flags:"));
+    Serial.print(F(", 0x"));
+    serial_print_hex(BMS_IC[current_ic].stat.flags[0]);
+    Serial.print(F(", 0x"));
+    serial_print_hex(BMS_IC[current_ic].stat.flags[1]);
+    Serial.print(F(", 0x"));
+    serial_print_hex(BMS_IC[current_ic].stat.flags[2]);
+    Serial.print(F("\tMux fail flag:"));
+    Serial.print(F(", 0x"));
+    serial_print_hex(BMS_IC[current_ic].stat.mux_fail[0]);
+    Serial.print(F("\tTHSD:"));
+    Serial.print(F(", 0x"));
+    serial_print_hex(BMS_IC[current_ic].stat.thsd[0]);
+    Serial.println();
+  }
+  Serial.println("\n");
+}
+
+/*!****************************************************************************
+   \brief Function to print the number of PEC Errors
+   @return void
+ *****************************************************************************/
+void print_pec_error_count(void)
+{
+  for (int current_ic = 0; current_ic < TOTAL_IC; current_ic++)
+  {
+    Serial.println("");
+    Serial.print(BMS_IC[current_ic].crc_count.pec_count, DEC);
+    Serial.print(F(" : PEC Errors Detected on IC"));
+    Serial.println(current_ic + 1, DEC);
+  }
+  Serial.println("\n");
+}
+
+/*!**********************************************************************************************************************************************
+  \brief For writing/reading configuration data or measuring cell voltages or reading aux register or reading status register in a continuous loop
+  @return void
+*************************************************************************************************************************************************/
+void measurement_loop(uint8_t datalog_en)
+{
+  int8_t error = 0;
+  char input = 0;
+
+  Serial.println(F("Transmit 'm' to quit"));
+
+  while (input != 'm')
+  {
+    if (Serial.available() > 0)
+    {
+      input = Serial.read();
+    }
+
+    if (WRITE_CONFIG == ENABLED)
+    {
+      wakeup_idle(TOTAL_IC);
+      ADBMS1818_wrcfg(TOTAL_IC, BMS_IC);
+      ADBMS1818_wrcfgb(TOTAL_IC, BMS_IC);
+      print_wrconfig();
+      print_wrconfigb();
+    }
+
+    if (READ_CONFIG == ENABLED)
+    {
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdcfg(TOTAL_IC, BMS_IC);
+      check_error(error);
+      error = ADBMS1818_rdcfgb(TOTAL_IC, BMS_IC);
+      check_error(error);
+      print_rxconfig();
+      print_rxconfigb();
+    }
+
+    if (MEASURE_CELL == ENABLED)
+    {
+      wakeup_idle(TOTAL_IC);
+      ADBMS1818_adcv(ADC_CONVERSION_MODE, ADC_DCP, CELL_CH_TO_CONVERT);
+      ADBMS1818_pollAdc();
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdcv(0, TOTAL_IC, BMS_IC);
+      check_error(error);
+      print_cells(datalog_en);
+    }
+
+    if (MEASURE_AUX == ENABLED)
+    {
+      wakeup_idle(TOTAL_IC);
+      ADBMS1818_adax(ADC_CONVERSION_MODE , AUX_CH_ALL);
+      ADBMS1818_pollAdc();
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdaux(0, TOTAL_IC, BMS_IC); // Set to read back all aux registers
+      check_error(error);
+      print_aux(datalog_en);
+    }
+
+    if (MEASURE_STAT == ENABLED)
+    {
+      wakeup_idle(TOTAL_IC);
+      ADBMS1818_adstat(ADC_CONVERSION_MODE, STAT_CH_ALL);
+      ADBMS1818_pollAdc();
+      wakeup_idle(TOTAL_IC);
+      error = ADBMS1818_rdstat(0, TOTAL_IC, BMS_IC); // Set to read back all aux registers
+      check_error(error);
+      print_stat();
+    }
+
+    if (PRINT_PEC == ENABLED)
+    {
+      print_pec_error_count();
+    }
+
+    delay(MEASUREMENT_LOOP_TIME);
+  }
 }
 
 

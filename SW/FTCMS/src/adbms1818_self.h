@@ -25,6 +25,12 @@
 #define AUX_CH_GPIO5 5
 #define AUX_CH_VREF2 6
 
+#define STAT_CH_ALL 0
+#define STAT_CH_SOC 1
+#define STAT_CH_ITEMP 2
+#define STAT_CH_VREGA 3
+#define STAT_CH_VREGD 4
+
 #define REG_ALL 0
 #define REG_1 1
 #define REG_2 2
@@ -397,4 +403,20 @@ void ADBMS1818_rdaux_reg(  uint8_t reg, //!< Determines which GPIO voltage regis
 void ADBMS181x_check_pec(uint8_t total_ic, //!< Number of ICs in the daisy chain
                        uint8_t reg, //!< Type of register
                        cell_asic *ic //!< A two dimensional array that will store the data
-					   );
+					              );
+
+/*!
+ Start a Status ADC Conversion  
+ @return void 
+ */
+void ADBMS1818_adstat( uint8_t MD, //!< ADC Conversion Mode
+                         uint8_t CHST //!< Sets which Stat channels are converted
+                      );
+
+/*!
+Starts cell voltage  and GPIO 1 & 2 conversion  
+@return void 
+*/
+void ADBMS1818_adcvax(uint8_t MD, //!< ADC Conversion Mode
+                       uint8_t DCP //!< Controls if Discharge is permitted during conversion
+                      );

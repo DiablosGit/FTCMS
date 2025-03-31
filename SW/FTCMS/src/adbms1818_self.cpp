@@ -1173,3 +1173,34 @@ int8_t ADBMS1818_rdaux(uint8_t reg, //Determines which GPIO voltage register is 
 	return (pec_error);
 }
 
+/* Start a Status ADC Conversion */
+void ADBMS1818_adstat(uint8_t MD, //ADC Mode
+					uint8_t CHST //Stat Channels to be measured
+)
+{
+	uint8_t cmd[4];
+	uint8_t md_bits;
+	
+	md_bits = (MD & 0x02) >> 1;
+	cmd[0] = md_bits + 0x04;
+	md_bits = (MD & 0x01) << 7;
+	cmd[1] = md_bits + 0x68 + CHST ;
+	
+	cmd_68(cmd);
+}
+
+/* Starts cell voltage and GPIO 1&2 conversion */
+void ADBMS1818_adcvax(uint8_t MD, //ADC Mode
+	uint8_t DCP //Discharge Permit
+   )
+{
+	uint8_t cmd[2];
+	uint8_t md_bits;
+
+	md_bits = (MD & 0x02) >> 1;
+	cmd[0] = md_bits | 0x04;
+	md_bits = (MD & 0x01) << 7;
+	cmd[1] =  md_bits | ((DCP&0x01)<<4) + 0x6F;
+
+	cmd_68(cmd);
+}
