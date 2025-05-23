@@ -2834,10 +2834,6 @@
     (stroke (width 0) (type default))
     (uuid 690b610c-d43e-4b0b-a5ef-87a08c3b7245)
   )
-  (wire (pts (xy 127 158.75) (xy 139.7 158.75))
-    (stroke (width 0) (type default))
-    (uuid 69bb7531-a731-4684-8561-7b3e4351db3b)
-  )
   (wire (pts (xy 185.42 90.17) (xy 225.425 90.17))
     (stroke (width 0) (type default))
     (uuid 69c14d83-1da0-4c34-91ba-a7a7f9b1e69f)
@@ -3457,6 +3453,10 @@
   (wire (pts (xy 321.31 206.375) (xy 321.31 204.47))
     (stroke (width 0) (type default))
     (uuid dfa65cdf-2e61-4b2c-98be-4abc9bc29dbd)
+  )
+  (wire (pts (xy 127 158.75) (xy 139.7 158.75))
+    (stroke (width 0) (type default))
+    (uuid dfbbe591-1a56-421d-bc15-7a2217fb5ddf)
   )
   (wire (pts (xy 311.785 194.31) (xy 311.785 189.23))
     (stroke (width 0) (type default))
@@ -4372,10 +4372,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 158.75 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0573a516-7f20-4df9-96e9-355aab5f104d)
-    (property "Reference" "C18" (at 132.715 157.4863 0)
+    (property "Reference" "C2" (at 133.35 158.1213 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 132.715 160.0263 0)
+    (property "Value" "10u" (at 133.35 160.6613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 158.75 0)
@@ -4389,7 +4389,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C18") (unit 1)
+          (reference "C2") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4403,7 +4403,7 @@
   (symbol (lib_id "Device:R") (at 114.3 85.09 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 05d26778-9329-433e-ba06-b50e923472c7)
-    (property "Reference" "R5" (at 118.11 83.82 90)
+    (property "Reference" "R15" (at 118.11 83.82 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 85.09 90)
@@ -4420,7 +4420,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R5") (unit 1)
+          (reference "R15") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4434,10 +4434,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 148.59 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0984f439-3333-4708-b1d7-4b951e8fd16c)
-    (property "Reference" "C16" (at 133.35 147.3263 0)
+    (property "Reference" "C4" (at 133.35 147.9613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 149.8663 0)
+    (property "Value" "10u" (at 133.35 150.5013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 148.59 0)
@@ -4451,7 +4451,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C16") (unit 1)
+          (reference "C4") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4495,10 +4495,10 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 294.64 123.825 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0a1a35e8-f939-4b79-98d2-673a06d845cd)
-    (property "Reference" "JP4" (at 297.18 122.555 90)
+    (property "Reference" "JP1" (at 297.18 123.19 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "SPI Mode" (at 297.18 125.095 90)
+    (property "Value" "SPI Mode" (at 297.18 125.73 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" (at 294.64 123.825 0)
@@ -4512,7 +4512,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP4") (unit 1)
+          (reference "JP1") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4526,7 +4526,7 @@
   (symbol (lib_id "Device:R") (at 114.3 140.97 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0a473226-0a53-4d1b-a93b-e98dbb0c3442)
-    (property "Reference" "R16" (at 118.11 139.7 90)
+    (property "Reference" "R4" (at 118.11 139.7 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 140.97 90)
@@ -4543,7 +4543,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R16") (unit 1)
+          (reference "R4") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4588,10 +4588,10 @@
   (symbol (lib_id "Device:C_Small") (at 340.36 151.765 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 0c4bf1f9-fe69-4439-b1a4-9e9db1d9e139)
-    (property "Reference" "C31" (at 340.3663 144.78 90)
+    (property "Reference" "C29" (at 340.3663 146.05 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "C_Small" (at 340.3663 147.32 90)
+    (property "Value" "C_Small" (at 340.3663 148.59 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 340.36 151.765 0)
@@ -4605,7 +4605,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C31") (unit 1)
+          (reference "C29") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4712,7 +4712,7 @@
   (symbol (lib_id "Device:R") (at 114.3 90.17 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1460445a-3f5c-4940-bfe0-4d843ea224b3)
-    (property "Reference" "R6" (at 118.11 88.9 90)
+    (property "Reference" "R14" (at 118.11 88.9 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 90.17 90)
@@ -4729,7 +4729,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R6") (unit 1)
+          (reference "R14") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4774,7 +4774,7 @@
   (symbol (lib_id "Device:R") (at 351.79 79.375 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 174160df-3849-4d8f-8ad4-65f4ed57e8be)
-    (property "Reference" "R30" (at 351.79 81.28 90)
+    (property "Reference" "R22" (at 351.79 81.28 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "1-3k" (at 351.79 77.47 90)
@@ -4791,7 +4791,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R30") (unit 1)
+          (reference "R22") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4836,10 +4836,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 87.63 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1ac354ca-2c72-4303-9307-f4db903561ac)
-    (property "Reference" "C4" (at 133.35 86.3663 0)
+    (property "Reference" "C16" (at 133.35 87.0013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 88.9063 0)
+    (property "Value" "10u" (at 133.35 89.5413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 87.63 0)
@@ -4853,7 +4853,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C4") (unit 1)
+          (reference "C16") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4867,10 +4867,10 @@
   (symbol (lib_id "Device:R") (at 207.899 24.13 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 1ba62f52-ecff-4959-9de6-1f0a3682444b)
-    (property "Reference" "R22" (at 209.677 22.8599 0)
+    (property "Reference" "R25" (at 210.82 23.495 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "R" (at 209.677 25.3999 0)
+    (property "Value" "R" (at 210.82 26.035 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 206.121 24.13 90)
@@ -4884,7 +4884,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R22") (unit 1)
+          (reference "R25") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5052,7 +5052,7 @@
   (symbol (lib_id "Device:R") (at 114.3 100.33 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2b048c6e-153c-48fe-a733-23f0180540bc)
-    (property "Reference" "R8" (at 118.11 99.06 90)
+    (property "Reference" "R12" (at 118.11 99.06 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 100.33 90)
@@ -5069,7 +5069,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R8") (unit 1)
+          (reference "R12") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5114,7 +5114,7 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 329.565 206.375 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2f565496-ae88-4394-ba55-ab47464fa863)
-    (property "Reference" "JP7" (at 329.565 203.835 0)
+    (property "Reference" "JP8" (at 329.565 203.835 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "4WireSPI" (at 329.565 209.55 0)
@@ -5131,7 +5131,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP7") (unit 1)
+          (reference "JP8") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5145,7 +5145,7 @@
   (symbol (lib_id "Device:R") (at 114.3 105.41 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 30af1f00-fa8e-4f26-a194-0334a94b49d4)
-    (property "Reference" "R9" (at 118.11 104.14 90)
+    (property "Reference" "R11" (at 118.11 104.14 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 105.41 90)
@@ -5162,7 +5162,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R9") (unit 1)
+          (reference "R11") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5176,10 +5176,10 @@
   (symbol (lib_id "Device:C") (at 338.455 83.185 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 31cedfa1-faa9-49b0-a03e-9e7e762368d4)
-    (property "Reference" "C28" (at 341.63 81.915 0)
+    (property "Reference" "C20" (at 341.63 82.55 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "1u " (at 341.63 84.455 0)
+    (property "Value" "1u " (at 341.63 85.09 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 339.4202 86.995 0)
@@ -5193,7 +5193,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C28") (unit 1)
+          (reference "C20") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5207,10 +5207,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 138.43 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 33abc823-192f-4de0-a7cc-521dc1bf7141)
-    (property "Reference" "C14" (at 133.35 137.1663 0)
+    (property "Reference" "C6" (at 133.35 137.8013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 139.7063 0)
+    (property "Value" "10u" (at 133.35 140.3413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 138.43 0)
@@ -5224,7 +5224,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C14") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5238,10 +5238,10 @@
   (symbol (lib_id "Device:C") (at 358.14 70.485 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 35093e11-6627-42ef-9650-f52cdb678772)
-    (property "Reference" "C32" (at 361.95 69.215 0)
+    (property "Reference" "C21" (at 361.95 69.85 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "0u1 100V" (at 361.95 71.755 0)
+    (property "Value" "0u1 100V" (at 361.95 72.39 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 359.1052 74.295 0)
@@ -5255,7 +5255,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C32") (unit 1)
+          (reference "C21") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5300,7 +5300,7 @@
   (symbol (lib_id "Connector_Generic:Conn_02x01") (at 351.155 198.755 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 3884de23-665b-4d35-b1ad-16d25890db87)
-    (property "Reference" "J4" (at 353.441 196.2149 90)
+    (property "Reference" "J6" (at 354.33 198.12 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "ToMaster" (at 353.441 198.7549 90)
@@ -5317,7 +5317,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "J4") (unit 1)
+          (reference "J6") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5393,10 +5393,10 @@
   (symbol (lib_id "Device:R") (at 219.71 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 3aa2425a-dcdd-43d6-ac11-febf6962518b)
-    (property "Reference" "R24" (at 221.615 74.93 0)
+    (property "Reference" "R32" (at 222.25 75.565 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "100/120R" (at 221.615 77.47 0)
+    (property "Value" "100/120R" (at 222.25 78.105 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 217.932 76.2 90)
@@ -5410,7 +5410,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R24") (unit 1)
+          (reference "R32") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5455,10 +5455,10 @@
   (symbol (lib_id "Device:R") (at 367.665 66.675 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 40ee130e-ce57-43c6-ab49-397e9fd6442b)
-    (property "Reference" "R31" (at 367.665 60.325 90)
+    (property "Reference" "R20" (at 367.665 62.23 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "100R" (at 367.665 62.865 90)
+    (property "Value" "100R" (at 367.665 64.77 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 367.665 68.453 90)
@@ -5472,7 +5472,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R31") (unit 1)
+          (reference "R20") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5486,7 +5486,7 @@
   (symbol (lib_id "Comparator:MAX9031AU") (at 112.395 234.95 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 44837d84-ebf0-45d3-b82d-b87a8fa5c917)
-    (property "Reference" "U1" (at 124.46 230.7591 0)
+    (property "Reference" "U2" (at 124.46 230.7591 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "MAX9031AU" (at 124.46 233.2991 0)
@@ -5506,7 +5506,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "U1") (unit 1)
+          (reference "U2") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5551,7 +5551,7 @@
   (symbol (lib_id "Device:R") (at 114.3 156.21 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 479d75c2-b293-4da5-8d57-5329db825811)
-    (property "Reference" "R19" (at 118.11 154.94 90)
+    (property "Reference" "R1" (at 118.11 154.94 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 156.21 90)
@@ -5568,7 +5568,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R19") (unit 1)
+          (reference "R1") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5582,10 +5582,10 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 311.785 123.825 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4d3bc80c-deff-44cd-8783-ba8129dd3e26)
-    (property "Reference" "JP5" (at 313.69 122.555 90)
+    (property "Reference" "JP2" (at 313.69 123.19 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "isoSPI Mode" (at 313.69 125.095 90)
+    (property "Value" "isoSPI Mode" (at 313.69 125.73 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" (at 311.785 123.825 0)
@@ -5599,7 +5599,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP5") (unit 1)
+          (reference "JP2") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5613,10 +5613,10 @@
   (symbol (lib_id "Device:R") (at 192.405 57.785 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4d4d17f6-425a-4e2c-9c18-7ba9fd118ef9)
-    (property "Reference" "R21" (at 192.405 51.435 90)
+    (property "Reference" "R23" (at 192.405 53.34 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "100/120R" (at 192.405 53.975 90)
+    (property "Value" "100/120R" (at 192.405 55.88 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 192.405 59.563 90)
@@ -5630,7 +5630,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R21") (unit 1)
+          (reference "R23") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5676,10 +5676,10 @@
   (symbol (lib_id "Device:C_Small") (at 338.455 198.12 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 52562fc8-354a-40a5-b627-69d9ba205428)
-    (property "Reference" "C29" (at 338.4613 191.135 90)
+    (property "Reference" "C31" (at 338.4613 193.04 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "C_Small" (at 338.4613 193.675 90)
+    (property "Value" "C_Small" (at 338.4613 195.58 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 338.455 198.12 0)
@@ -5693,7 +5693,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C29") (unit 1)
+          (reference "C31") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5707,10 +5707,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 97.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 54cd0c48-bc0f-41f8-ab16-4c4d019975b9)
-    (property "Reference" "C6" (at 133.35 96.5263 0)
+    (property "Reference" "C14" (at 133.35 97.1613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 99.0663 0)
+    (property "Value" "10u" (at 133.35 99.7013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 97.79 0)
@@ -5724,7 +5724,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C6") (unit 1)
+          (reference "C14") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5738,10 +5738,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 573e2d5f-847b-4379-a277-fbf3abeba244)
-    (property "Reference" "C19" (at 132.715 162.5663 0)
+    (property "Reference" "C28" (at 133.35 163.2013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 132.715 165.1063 0)
+    (property "Value" "10u" (at 133.35 165.7413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 163.83 0)
@@ -5755,7 +5755,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C19") (unit 1)
+          (reference "C28") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5769,10 +5769,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 107.95 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5795d7e4-1dc5-4dae-ac8c-a495955ece9b)
-    (property "Reference" "C8" (at 133.35 106.6863 0)
+    (property "Reference" "C12" (at 133.35 107.3213 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 109.2263 0)
+    (property "Value" "10u" (at 133.35 109.8613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 107.95 0)
@@ -5786,7 +5786,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C8") (unit 1)
+          (reference "C12") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5800,10 +5800,10 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 329.565 198.12 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 5ebcbbc9-f5b8-4dfc-893a-ee456f4a8bcd)
-    (property "Reference" "JP6" (at 329.565 192.405 0)
+    (property "Reference" "JP7" (at 329.565 193.04 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "4Wire SPI" (at 329.565 194.945 0)
+    (property "Value" "4Wire SPI" (at 329.565 195.58 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" (at 329.565 198.12 0)
@@ -5817,7 +5817,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP6") (unit 1)
+          (reference "JP7") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5954,10 +5954,10 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 330.2 162.56 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 767b7f0b-d6b0-49a2-b5a6-ad5355dd72ee)
-    (property "Reference" "JP8" (at 330.2 156.845 0)
+    (property "Reference" "JP5" (at 330.2 157.48 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "4WireSPI" (at 330.2 159.385 0)
+    (property "Value" "4WireSPI" (at 330.2 160.02 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" (at 330.2 162.56 0)
@@ -5971,7 +5971,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP8") (unit 1)
+          (reference "JP5") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6016,10 +6016,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 128.27 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 77d0adfc-d1c4-479d-af1f-11b9ce39884b)
-    (property "Reference" "C12" (at 133.35 127.0063 0)
+    (property "Reference" "C8" (at 133.35 127.6413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 129.5463 0)
+    (property "Value" "10u" (at 133.35 130.1813 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 128.27 0)
@@ -6033,7 +6033,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C12") (unit 1)
+          (reference "C8") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6047,7 +6047,7 @@
   (symbol (lib_id "Device:C_Small") (at 337.82 206.375 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 78dfe7e8-77c0-48fc-bf2d-3f2e67e1cdde)
-    (property "Reference" "C27" (at 341.63 208.28 90)
+    (property "Reference" "C32" (at 341.63 208.28 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "C_Small" (at 340.995 210.185 90)
@@ -6064,7 +6064,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C27") (unit 1)
+          (reference "C32") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6170,7 +6170,7 @@
   (symbol (lib_id "ADBMS1818:ADBMS1818ASWAZ") (at 139.7 67.31 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 80e37494-cbc5-4bbc-9b19-770f50d0a7bb)
-    (property "Reference" "U2" (at 162.56 55.88 0)
+    (property "Reference" "U1" (at 162.56 55.88 0)
       (effects (font (size 1.524 1.524)))
     )
     (property "Value" "ADBMS1818ASWAZ" (at 162.56 59.69 0)
@@ -6250,7 +6250,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "U2") (unit 1)
+          (reference "U1") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6482,7 +6482,7 @@
   (symbol (lib_id "Device:R") (at 114.3 80.01 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9a35b295-9a8a-4a28-a10e-b05065de2e26)
-    (property "Reference" "R4" (at 118.11 78.74 90)
+    (property "Reference" "R16" (at 118.11 78.74 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 80.01 90)
@@ -6499,7 +6499,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R4") (unit 1)
+          (reference "R16") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6544,7 +6544,7 @@
   (symbol (lib_id "Device:R") (at 114.3 115.57 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9ec91dab-a68c-479a-94ee-ac2cb95537ee)
-    (property "Reference" "R11" (at 118.11 114.3 90)
+    (property "Reference" "R9" (at 118.11 114.3 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 115.57 90)
@@ -6561,7 +6561,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R11") (unit 1)
+          (reference "R9") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6606,7 +6606,7 @@
   (symbol (lib_id "Device:R") (at 114.3 151.13 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a5a5bd28-b4ae-4b3e-9dd0-283265122773)
-    (property "Reference" "R18" (at 118.11 149.86 90)
+    (property "Reference" "R2" (at 118.11 149.86 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 151.13 90)
@@ -6623,7 +6623,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R18") (unit 1)
+          (reference "R2") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6637,7 +6637,7 @@
   (symbol (lib_id "Device:R") (at 106.68 67.31 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a6f72575-4628-4b83-9df3-c7b7ebde65f5)
-    (property "Reference" "R1" (at 110.49 65.405 90)
+    (property "Reference" "R19" (at 110.49 65.405 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "100R" (at 106.68 67.31 90)
@@ -6654,7 +6654,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R1") (unit 1)
+          (reference "R19") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6698,7 +6698,7 @@
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 330.835 151.765 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ad85b833-470f-4bd3-8f33-97402fb40edf)
-    (property "Reference" "JP9" (at 330.835 149.225 0)
+    (property "Reference" "JP6" (at 330.835 149.225 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "4WireSPI" (at 330.835 154.94 0)
@@ -6715,7 +6715,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP9") (unit 1)
+          (reference "JP6") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6729,7 +6729,7 @@
   (symbol (lib_id "Device:R") (at 114.3 135.89 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid adc7a51c-7fc5-45cd-af57-3c8b30380ee4)
-    (property "Reference" "R15" (at 118.11 134.62 90)
+    (property "Reference" "R5" (at 118.11 134.62 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 135.89 90)
@@ -6746,7 +6746,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R15") (unit 1)
+          (reference "R5") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6760,10 +6760,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 102.87 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid af0131d7-546d-4be3-95c0-70f6436b1f05)
-    (property "Reference" "C7" (at 133.35 101.6063 0)
+    (property "Reference" "C13" (at 133.35 102.2413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 104.1463 0)
+    (property "Value" "10u" (at 133.35 104.7813 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 102.87 0)
@@ -6777,7 +6777,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C7") (unit 1)
+          (reference "C13") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6791,7 +6791,7 @@
   (symbol (lib_id "Device:R") (at 114.3 146.05 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid af3f91c1-d196-492c-bfe4-76fa1c731ea6)
-    (property "Reference" "R17" (at 118.11 144.78 90)
+    (property "Reference" "R3" (at 118.11 144.78 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 146.05 90)
@@ -6808,7 +6808,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R17") (unit 1)
+          (reference "R3") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6884,10 +6884,10 @@
   (symbol (lib_id "Connector_Generic:Conn_02x01") (at 350.52 167.005 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b26fbc19-89a4-4cf2-9be0-7b3ac9b67b83)
-    (property "Reference" "J3" (at 353.568 164.4649 90)
+    (property "Reference" "J3" (at 353.06 165.1 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "ToSlave" (at 353.568 167.0049 90)
+    (property "Value" "ToSlave" (at 353.06 167.64 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-0212_2x01_P3.00mm_Vertical" (at 350.52 167.005 0)
@@ -6915,10 +6915,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 113.03 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b2f6efd5-d063-4419-bb06-b34091b6a3f2)
-    (property "Reference" "C9" (at 133.35 111.7663 0)
+    (property "Reference" "C11" (at 133.35 112.4013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 114.3063 0)
+    (property "Value" "10u" (at 133.35 114.9413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 113.03 0)
@@ -6932,7 +6932,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C9") (unit 1)
+          (reference "C11") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6946,7 +6946,7 @@
   (symbol (lib_id "Device:C_Small") (at 316.865 199.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b530e55b-a4ef-464b-94af-49487eab0219)
-    (property "Reference" "C26" (at 310.515 198.12 0)
+    (property "Reference" "C24" (at 310.515 198.12 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "10n" (at 310.515 200.66 0)
@@ -6963,7 +6963,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C26") (unit 1)
+          (reference "C24") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6977,7 +6977,7 @@
   (symbol (lib_id "Device:R") (at 114.3 69.85 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b5d47624-c7dc-4681-a716-3a0fe1fda6fa)
-    (property "Reference" "R2" (at 118.11 68.58 90)
+    (property "Reference" "R18" (at 118.11 68.58 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 69.85 90)
@@ -6994,7 +6994,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R2") (unit 1)
+          (reference "R18") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7008,10 +7008,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 123.19 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b7f87557-848b-4ff7-82b4-29e93dcb61a1)
-    (property "Reference" "C11" (at 133.35 121.9263 0)
+    (property "Reference" "C9" (at 133.35 122.5613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 124.4663 0)
+    (property "Value" "10u" (at 133.35 125.1013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 123.19 0)
@@ -7025,7 +7025,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C11") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7071,10 +7071,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 72.39 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid bd0df80b-df0c-451c-9d73-29a5de7207d0)
-    (property "Reference" "C1" (at 133.35 71.1263 0)
+    (property "Reference" "C19" (at 133.35 71.7613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 73.6663 0)
+    (property "Value" "10u" (at 133.35 74.3013 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 72.39 0)
@@ -7088,7 +7088,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C1") (unit 1)
+          (reference "C19") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7102,7 +7102,7 @@
   (symbol (lib_id "Device:R") (at 114.3 130.81 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bd2c5df7-1479-44eb-bcbf-09e876dc4a88)
-    (property "Reference" "R14" (at 118.11 129.54 90)
+    (property "Reference" "R6" (at 118.11 129.54 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 130.81 90)
@@ -7119,7 +7119,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R14") (unit 1)
+          (reference "R6") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7164,7 +7164,7 @@
   (symbol (lib_id "Device:R") (at 114.3 95.25 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c004fb0f-56ba-4e7c-a71e-58b356f87f59)
-    (property "Reference" "R7" (at 118.11 93.98 90)
+    (property "Reference" "R13" (at 118.11 93.98 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 95.25 90)
@@ -7181,7 +7181,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R7") (unit 1)
+          (reference "R13") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7367,7 +7367,7 @@
   (symbol (lib_id "Device:R") (at 114.3 161.29 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ce52d76a-752e-45c1-abeb-250b68cbb53e)
-    (property "Reference" "R20" (at 118.11 160.02 90)
+    (property "Reference" "R0" (at 118.11 160.02 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 161.29 90)
@@ -7384,7 +7384,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R20") (unit 1)
+          (reference "R0") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7427,10 +7427,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 143.51 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid da2c191c-0612-430d-a747-ea38721dfa60)
-    (property "Reference" "C15" (at 133.35 142.2463 0)
+    (property "Reference" "C5" (at 133.35 142.8813 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 144.7863 0)
+    (property "Value" "10u" (at 133.35 145.4213 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 143.51 0)
@@ -7444,7 +7444,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C15") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7594,10 +7594,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 133.35 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e3a084ce-09ba-4155-813a-e4a4f9ada210)
-    (property "Reference" "C13" (at 133.35 132.0863 0)
+    (property "Reference" "C7" (at 133.35 132.7213 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 134.6263 0)
+    (property "Value" "10u" (at 133.35 135.2613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 133.35 0)
@@ -7611,7 +7611,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C13") (unit 1)
+          (reference "C7") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7625,10 +7625,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 92.71 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e6d5ef62-979e-444f-9262-7f5565ee04c6)
-    (property "Reference" "C5" (at 133.35 91.4463 0)
+    (property "Reference" "C15" (at 133.35 92.0813 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 93.9863 0)
+    (property "Value" "10u" (at 133.35 94.6213 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 92.71 0)
@@ -7642,7 +7642,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C5") (unit 1)
+          (reference "C15") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7656,10 +7656,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 77.47 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid e7b7e31e-8080-4f60-a33c-884c64efe94d)
-    (property "Reference" "C2" (at 133.35 76.2063 0)
+    (property "Reference" "C18" (at 133.35 76.8413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 78.7463 0)
+    (property "Value" "10u" (at 133.35 79.3813 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 77.47 0)
@@ -7673,7 +7673,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C2") (unit 1)
+          (reference "C18") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7748,10 +7748,10 @@
   (symbol (lib_id "Device:R") (at 207.899 33.782 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid ed6c9ef7-a391-4e0b-a66e-78efbcd8fdc9)
-    (property "Reference" "R23" (at 209.677 32.5119 0)
+    (property "Reference" "R26" (at 210.82 33.147 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "R" (at 209.677 35.0519 0)
+    (property "Value" "R" (at 210.82 35.687 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 206.121 33.782 90)
@@ -7765,7 +7765,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R23") (unit 1)
+          (reference "R26") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7810,10 +7810,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 153.67 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f145dacc-0d32-4e26-8bd3-258fc5165b15)
-    (property "Reference" "C17" (at 132.715 152.4063 0)
+    (property "Reference" "C3" (at 133.35 153.0413 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 132.715 154.9463 0)
+    (property "Value" "10u" (at 133.35 155.5813 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 153.67 0)
@@ -7827,7 +7827,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C17") (unit 1)
+          (reference "C3") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7841,10 +7841,10 @@
   (symbol (lib_id "Device:C_Small") (at 130.175 82.55 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f2ea1962-3310-41f2-95ec-f25246ec04b4)
-    (property "Reference" "C3" (at 133.35 81.2863 0)
+    (property "Reference" "C17" (at 133.35 81.9213 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "10u" (at 133.35 83.8263 0)
+    (property "Value" "10u" (at 133.35 84.4613 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder" (at 130.175 82.55 0)
@@ -7858,7 +7858,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C3") (unit 1)
+          (reference "C17") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7903,10 +7903,10 @@
   (symbol (lib_id "Device:C") (at 130.81 58.42 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid f5be9b48-c78e-4ac8-9ca2-6186e2e4de67)
-    (property "Reference" "C20" (at 130.81 50.8 90)
-      (effects (font (size 1.27 1.27)) hide)
+    (property "Reference" "C1" (at 130.81 52.07 90)
+      (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "100n 100V" (at 130.81 53.34 90)
+    (property "Value" "100n 100V" (at 130.81 54.61 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 134.62 57.4548 0)
@@ -7920,7 +7920,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C20") (unit 1)
+          (reference "C1") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7965,7 +7965,7 @@
   (symbol (lib_id "Device:R") (at 114.3 74.93 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f6e904f7-5aab-4d45-86b6-865772fe8226)
-    (property "Reference" "R3" (at 118.11 73.66 90)
+    (property "Reference" "R17" (at 118.11 73.66 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 74.93 90)
@@ -7982,7 +7982,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R3") (unit 1)
+          (reference "R17") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7996,7 +7996,7 @@
   (symbol (lib_id "Device:R") (at 114.3 120.65 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f95de805-dfa8-43b3-9db2-70ca4653ea07)
-    (property "Reference" "R12" (at 118.11 119.38 90)
+    (property "Reference" "R8" (at 118.11 119.38 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 120.65 90)
@@ -8013,7 +8013,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R12") (unit 1)
+          (reference "R8") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -8058,7 +8058,7 @@
   (symbol (lib_id "Device:R") (at 114.3 125.73 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fa13613c-6d12-4320-8b61-1f6642b4affc)
-    (property "Reference" "R13" (at 118.11 124.46 90)
+    (property "Reference" "R7" (at 118.11 124.46 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "10R" (at 114.3 125.73 90)
@@ -8075,7 +8075,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R13") (unit 1)
+          (reference "R7") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
