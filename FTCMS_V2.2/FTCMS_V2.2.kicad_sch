@@ -3186,10 +3186,6 @@
     (stroke (width 0) (type default))
     (uuid ade7c10b-0c44-4ed9-bb5b-a2e1625d39d6)
   )
-  (wire (pts (xy 294.64 120.015) (xy 311.785 120.015))
-    (stroke (width 0) (type default))
-    (uuid ae214ef8-d372-428a-88bb-c38317f845a6)
-  )
   (wire (pts (xy 130.175 74.93) (xy 139.7 74.93))
     (stroke (width 0) (type default))
     (uuid ae24d5ab-0a9f-4313-a9f8-872f0332a633)
@@ -4050,11 +4046,11 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "Vreg" (shape input) (at 311.785 127.635 180) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right))
+  (global_label "Vreg" (shape input) (at 306.07 123.19 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
     (uuid 671741f7-a77a-44db-81e5-6068a97fa5a2)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 304.6874 127.635 0)
-      (effects (font (size 1.27 1.27)) (justify right) hide)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 313.0882 123.19 0)
+      (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
   (global_label "Vreg" (shape input) (at 241.046 90.17 0) (fields_autoplaced)
@@ -4246,10 +4242,10 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "ISOMD" (shape input) (at 294.64 120.015 180) (fields_autoplaced)
+  (global_label "ISOMD" (shape input) (at 300.99 119.38 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid ce7f8821-ba46-4ae1-a157-171173cdfc50)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 285.7886 120.015 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 292.1386 119.38 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -4281,10 +4277,10 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
-  (global_label "V-" (shape input) (at 294.64 127.635 180) (fields_autoplaced)
+  (global_label "V-" (shape input) (at 295.91 123.19 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid d891ccac-2dd6-4e64-ba17-6d66c9f83547)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 288.9938 127.635 0)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 290.2638 123.19 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
@@ -4487,37 +4483,6 @@
       (project "FTCMS_PCB_v2.2"
         (path "/83a6a285-13b6-4ec8-ae72-c2fe713cc487"
           (reference "#PWR0105") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 294.64 123.825 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 0a1a35e8-f939-4b79-98d2-673a06d845cd)
-    (property "Reference" "JP1" (at 297.18 123.19 90)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Value" "SPI Mode" (at 297.18 125.73 90)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" (at 294.64 123.825 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 294.64 123.825 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 67a03480-f4ce-4a95-98e5-8a49af303567))
-    (pin "2" (uuid ae1c9960-bdf3-49cb-ae43-5d2f53538f26))
-    (instances
-      (project "FTCMS_V2.2"
-        (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP1") (unit 1)
-        )
-      )
-      (project "FTCMS_PCB_v2.2"
-        (path "/83a6a285-13b6-4ec8-ae72-c2fe713cc487"
-          (reference "JP1") (unit 1)
         )
       )
     )
@@ -4898,10 +4863,10 @@
   (symbol (lib_id "Jumper:SolderJumper_3_Open") (at 204.47 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 2090c595-e39b-4504-996d-cae203ef5bc5)
-    (property "Reference" "JP1" (at 204.47 64.77 0)
+    (property "Reference" "JP9" (at 204.47 66.04 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "IPA - SCK" (at 204.47 67.31 0)
+    (property "Value" "IPA - SCK" (at 204.47 68.58 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm" (at 204.47 71.12 0)
@@ -4916,7 +4881,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP1") (unit 1)
+          (reference "JP9") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4930,10 +4895,10 @@
   (symbol (lib_id "Device:R") (at 285.75 193.04 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 21de6373-c5bd-44e0-82da-b05357e37312)
-    (property "Reference" "R28" (at 288.29 191.77 0)
+    (property "Reference" "R31" (at 288.29 192.405 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "51R" (at 288.29 194.31 0)
+    (property "Value" "51R" (at 288.29 194.945 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 283.972 193.04 90)
@@ -4947,7 +4912,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R28") (unit 1)
+          (reference "R31") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -4992,10 +4957,10 @@
   (symbol (lib_id "Device:C") (at 299.085 238.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 25137083-23cf-41fe-b462-409180eb9eaa)
-    (property "Reference" "C25" (at 303.149 237.4899 0)
+    (property "Reference" "C22" (at 302.26 238.125 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "1u " (at 303.149 240.0299 0)
+    (property "Value" "1u " (at 302.26 240.665 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" (at 300.0502 242.57 0)
@@ -5009,7 +4974,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C25") (unit 1)
+          (reference "C22") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -5298,15 +5263,15 @@
   )
 
   (symbol (lib_id "Connector_Generic:Conn_02x01") (at 351.155 198.755 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom yes) (on_board yes) (dnp no)
     (uuid 3884de23-665b-4d35-b1ad-16d25890db87)
-    (property "Reference" "J6" (at 354.33 198.12 90)
+    (property "Reference" "J6" (at 354.33 196.85 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Value" "ToMaster" (at 353.441 198.7549 90)
-      (effects (font (size 1.27 1.27)) (justify right) hide)
+    (property "Value" "ToMaster" (at 354.33 199.39 90)
+      (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-0212_2x01_P3.00mm_Vertical" (at 351.155 198.755 0)
+    (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0200_1x02_P3.00mm_Horizontal" (at 351.155 198.755 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 351.155 198.755 0)
@@ -5579,37 +5544,6 @@
     )
   )
 
-  (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 311.785 123.825 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 4d3bc80c-deff-44cd-8783-ba8129dd3e26)
-    (property "Reference" "JP2" (at 313.69 123.19 90)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Value" "isoSPI Mode" (at 313.69 125.73 90)
-      (effects (font (size 1.27 1.27)) (justify right))
-    )
-    (property "Footprint" "Jumper:SolderJumper-2_P1.3mm_Open_TrianglePad1.0x1.5mm" (at 311.785 123.825 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "~" (at 311.785 123.825 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid f8acc8ad-0873-4d17-897e-d54b8a1be796))
-    (pin "2" (uuid 46225496-665f-4c59-95c2-e227b91bbd90))
-    (instances
-      (project "FTCMS_V2.2"
-        (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP2") (unit 1)
-        )
-      )
-      (project "FTCMS_PCB_v2.2"
-        (path "/83a6a285-13b6-4ec8-ae72-c2fe713cc487"
-          (reference "JP2") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:R") (at 192.405 57.785 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 4d4d17f6-425a-4e2c-9c18-7ba9fd118ef9)
@@ -5862,7 +5796,7 @@
   (symbol (lib_id "Device:C_Small") (at 282.575 167.64 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 672157d1-aeac-4f97-a600-d6c338e4d805)
-    (property "Reference" "C21" (at 276.225 166.37 0)
+    (property "Reference" "C26" (at 276.225 166.37 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "10n" (at 276.225 168.91 0)
@@ -5879,7 +5813,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C21") (unit 1)
+          (reference "C26") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6078,7 +6012,7 @@
   (symbol (lib_id "Device:C_Small") (at 288.29 179.705 270) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 799d5beb-519b-419f-b9f6-b6560ebf5091)
-    (property "Reference" "C24" (at 287.02 186.055 0)
+    (property "Reference" "C27" (at 287.02 186.055 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "10n" (at 289.56 186.055 0)
@@ -6095,7 +6029,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C24") (unit 1)
+          (reference "C27") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6330,7 +6264,7 @@
   (symbol (lib_id "Device:R") (at 285.75 168.91 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 89e4f004-6d5b-4763-a517-0c1151cee674)
-    (property "Reference" "R27" (at 292.1 170.18 0)
+    (property "Reference" "R30" (at 292.1 170.18 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "51R" (at 292.1 167.64 0)
@@ -6347,7 +6281,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R27") (unit 1)
+          (reference "R30") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -6890,7 +6824,7 @@
     (property "Value" "ToSlave" (at 353.06 167.64 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43045-0212_2x01_P3.00mm_Vertical" (at 350.52 167.005 0)
+    (property "Footprint" "Connector_Molex:Molex_Micro-Fit_3.0_43650-0200_1x02_P3.00mm_Horizontal" (at 350.52 167.005 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 350.52 167.005 0)
@@ -7039,7 +6973,7 @@
   (symbol (lib_id "Jumper:SolderJumper_3_Open") (at 204.47 81.28 0) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b8079ee5-9dee-495a-9c16-1220781850a0)
-    (property "Reference" "JP2" (at 204.47 84.455 0)
+    (property "Reference" "JP4" (at 204.47 84.455 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "IMA - CS" (at 204.47 86.995 0)
@@ -7057,7 +6991,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "JP2") (unit 1)
+          (reference "JP4") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7225,10 +7159,10 @@
   (symbol (lib_id "Device:R") (at 229.235 90.17 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid c5d5ba3e-185b-4b1b-8d87-455a52151d50)
-    (property "Reference" "R25" (at 229.235 83.82 90)
+    (property "Reference" "R27" (at 229.235 85.09 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "R" (at 229.235 86.36 90)
+    (property "Value" "R" (at 229.235 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 229.235 91.948 90)
@@ -7242,7 +7176,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R25") (unit 1)
+          (reference "R27") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7293,7 +7227,7 @@
     (property "Value" "Conn_02x10_Odd_Even" (at 149.86 266.0649 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Project_Lib:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal" (at 163.195 266.065 0)
+    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x10_P2.54mm_Vertical" (at 163.195 266.065 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 163.195 266.065 0)
@@ -7333,10 +7267,42 @@
     )
   )
 
+  (symbol (lib_id "Jumper:SolderJumper_3_Open") (at 300.99 123.19 0) (mirror x) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid cc306017-633c-42e1-bbc0-65b422898d6a)
+    (property "Reference" "JP10" (at 300.99 126.365 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "SPI - isoSPI" (at 300.99 128.905 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Jumper:SolderJumper-3_P2.0mm_Open_TrianglePad1.0x1.5mm" (at 300.99 123.19 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "~" (at 300.99 123.19 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 607a4b60-6aec-4e89-b714-8fbac112cc7d))
+    (pin "2" (uuid d0e216d9-353a-42fd-9e13-e96d8a430618))
+    (pin "3" (uuid 02b94724-4bac-4a76-b085-668cf93880ad))
+    (instances
+      (project "FTCMS_V2.2"
+        (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
+          (reference "JP10") (unit 1)
+        )
+      )
+      (project "FTCMS_PCB_v2.2"
+        (path "/83a6a285-13b6-4ec8-ae72-c2fe713cc487"
+          (reference "JP9") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Device:R") (at 285.75 200.66 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ccd65724-d43e-4d21-b3a4-ddd4599ac67e)
-    (property "Reference" "R29" (at 291.465 201.93 0)
+    (property "Reference" "R24" (at 291.465 201.93 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "51R" (at 291.465 199.39 0)
@@ -7353,7 +7319,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R29") (unit 1)
+          (reference "R24") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7491,10 +7457,10 @@
   (symbol (lib_id "Device:R") (at 285.75 161.29 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid dc579c96-6b7d-4231-8fda-a8964be5b674)
-    (property "Reference" "R26" (at 288.29 160.02 0)
+    (property "Reference" "R21" (at 288.29 160.655 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "51R" (at 288.29 162.56 0)
+    (property "Value" "51R" (at 288.29 163.195 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder" (at 283.972 161.29 90)
@@ -7508,7 +7474,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "R26") (unit 1)
+          (reference "R21") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -7528,7 +7494,7 @@
     (property "Value" "H0068ANL" (at 328.93 168.91 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "MyFootprints:H0068ANL" (at 328.93 168.275 0)
+    (property "Footprint" "Audio_Module:H0068ANL" (at 328.93 168.275 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.mouser.de/datasheet/2/447/plei_s_a0008872115_1-2904194.pdf" (at 328.93 165.735 0)
@@ -7687,7 +7653,7 @@
   (symbol (lib_id "Device:C_Small") (at 282.575 199.39 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid eb3ca639-3612-474f-b3ec-a8debc197e73)
-    (property "Reference" "C22" (at 276.225 198.12 0)
+    (property "Reference" "C25" (at 276.225 198.12 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "10n" (at 276.225 200.66 0)
@@ -7704,7 +7670,7 @@
     (instances
       (project "FTCMS_V2.2"
         (path "/30da9297-09e7-47e7-9d66-9d536b8d0426"
-          (reference "C22") (unit 1)
+          (reference "C25") (unit 1)
         )
       )
       (project "FTCMS_PCB_v2.2"
@@ -8095,7 +8061,7 @@
     (property "Value" "Conn_01x20_Female" (at 50.165 86.995 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Project_Lib:Molex_Micro-Fit_3.0_43045-2000_2x10_P3.00mm_Horizontal" (at 49.53 114.935 0)
+    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_2x10_P2.54mm_Vertical" (at 49.53 114.935 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "43045-2001" (at 49.53 114.935 0)
