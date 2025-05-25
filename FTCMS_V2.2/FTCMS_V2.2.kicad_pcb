@@ -818,10 +818,10 @@
       (net 2 "V-") (pinfunction "Pin_19") (pintype "passive") (tstamp 9f630449-d563-4252-9145-0461a146af2a))
     (pad "20" thru_hole oval locked (at -2.54 22.86 90) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask")
       (net 67 "unconnected-(J2-Pin_20-Pad20)") (pinfunction "Pin_20") (pintype "passive+no_connect") (tstamp cb9986b0-5b42-4846-bca6-91c9aaa77ae2))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x10_P2.54mm_Vertical.wrl"
-      (offset (xyz 0 0 0))
+    (model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x10_P2.54mm_Vertical.step"
+      (offset (xyz 0 0 -1.6))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz 0 -180 0))
     )
   )
 
@@ -1055,10 +1055,10 @@
       (net 37 "Net-(J6-Pin_1)") (pinfunction "Pin_1") (pintype "passive") (tstamp 8d77662d-8dbf-4527-9829-4eff4a75c76d))
     (pad "2" thru_hole oval (at 3 0 180) (size 1.5 2.02) (drill 1.02) (layers "*.Cu" "*.Mask")
       (net 35 "Net-(J6-Pin_2)") (pinfunction "Pin_2") (pintype "passive") (tstamp 3554749f-1096-467b-88f3-6903b11d0c35))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43650-0200_1x02_P3.00mm_Horizontal.wrl"
-      (offset (xyz 0 0 0))
+    (model "C:/Users/David/Downloads/0436500200--3DModel-STEP-231308.STEP"
+      (offset (xyz 1.5 4 2))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz -90 0 -180))
     )
   )
 
@@ -2746,10 +2746,10 @@
       (net 70 "MOSI") (pinfunction "Pin_3") (pintype "passive") (tstamp 9eeb0907-9c8b-472c-ad5a-927b20418778))
     (pad "4" thru_hole circle (at 3 3 270) (size 1.5 1.5) (drill 1.02) (layers "*.Cu" "*.Mask")
       (net 71 "MISO") (pinfunction "Pin_4") (pintype "passive") (tstamp e53117c2-8766-4c99-b225-752da5de29ad))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43045-0400_2x02_P3.00mm_Horizontal.wrl"
-      (offset (xyz 0 0 0))
+    (model "C:/Users/David/Downloads/0430450400--3DModel-STEP-361473.STEP"
+      (offset (xyz 1.5 4 4))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz -90 0 -180))
     )
   )
 
@@ -3962,10 +3962,10 @@
       (net 56 "Net-(J1-Pin_19)") (pinfunction "Pin_19") (pintype "passive") (tstamp 1bd34dfc-bf01-47a6-9794-7d8276be36fd))
     (pad "20" thru_hole oval locked (at -2.54 22.86 90) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask")
       (net 57 "unconnected-(J1-Pin_20-Pad20)") (pinfunction "Pin_20") (pintype "passive+no_connect") (tstamp a6299eef-7e82-4016-9eba-055de0655b6e))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x10_P2.54mm_Vertical.wrl"
-      (offset (xyz 0 0 0))
+    (model "${KICAD6_3DMODEL_DIR}/Connector_PinHeader_2.54mm.3dshapes/PinHeader_2x10_P2.54mm_Vertical.step"
+      (offset (xyz 0 0 -1.6))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz 0 -180 0))
     )
   )
 
@@ -5025,10 +5025,10 @@
       (net 33 "Net-(J3-Pin_1)") (pinfunction "Pin_1") (pintype "passive") (tstamp 0c09ba0c-63b2-43c0-a3e3-d52d17246e0f))
     (pad "2" thru_hole oval (at 3 0 180) (size 1.5 2.02) (drill 1.02) (layers "*.Cu" "*.Mask")
       (net 31 "Net-(J3-Pin_2)") (pinfunction "Pin_2") (pintype "passive") (tstamp 8180a0e1-5e73-4281-919c-5c659feb8dce))
-    (model "${KICAD6_3DMODEL_DIR}/Connector_Molex.3dshapes/Molex_Micro-Fit_3.0_43650-0200_1x02_P3.00mm_Horizontal.wrl"
-      (offset (xyz 0 0 0))
+    (model "C:/Users/David/Downloads/0436500200--3DModel-STEP-231308.STEP"
+      (offset (xyz 1.5 4 2.5))
       (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
+      (rotate (xyz -90 0 -180))
     )
   )
 
